@@ -1,6 +1,6 @@
 ## Ocean Of Code
 
-Challenge [link](https://www.codingame.com/contests/spring-challenge-2022).
+Challenge [link](https://www.codingame.com/contests/ocean-of-code).
 
 ### Goal
 This game is based on the board game Captain Sonar.

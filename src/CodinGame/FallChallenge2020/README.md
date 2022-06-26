@@ -1,6 +1,6 @@
 ## Fall Challenge 2022
 
-Challenge [link](https://www.codingame.com/contests/spring-challenge-2022).
+Challenge [link](https://www.codingame.com/contests/fall-challenge-2020).
 
 ### Goal
 

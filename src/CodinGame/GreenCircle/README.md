@@ -17,7 +17,6 @@ Each team starts the game with 4 BONUS skill cards and 4 Technical Debt cards. T
 Deckbuilding: the player discard pile is reshuffled to create the player's draw pile
 The team will get more cards and will lose some during the game.
 
-
 ## Final Rank and League
 
 Wood league, **XXX / 1720** 
