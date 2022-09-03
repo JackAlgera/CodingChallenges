@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class Day11 {
 
-    private static final String INPUT_NAME = "src/Year2022.Day11/input.txt";
+    private static final String INPUT_NAME = "AdventOfCode/Year2021/Day11/input.txt";
 
     public static void main(String[] args) throws IOException {
         new Day11Code().run();

@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class Day4 {
 
-    private static final String INPUT_NAME = "src/Year2022.Day4/input.txt";
+    private static final String INPUT_NAME = "AdventOfCode/Year2021/Day4/input.txt";
 
     public static void main(String[] args) throws IOException {
         new PartOne().run();

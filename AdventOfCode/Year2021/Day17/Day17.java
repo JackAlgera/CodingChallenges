@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 
 public class Day17 {
 
-    private static final String INPUT_NAME = "src/Year2022.Day17/input.txt";
+    private static final String INPUT_NAME = "AdventOfCode/Year2021/Day17/input.txt";
 
     public static void main(String[] args) throws IOException {
         System.out.println("-------- Day 17 --------");

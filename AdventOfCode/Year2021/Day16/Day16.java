@@ -12,7 +12,7 @@ import java.util.Queue;
 
 public class Day16 {
 
-    private static final String INPUT_NAME = "src/Year2022.Day16/input.txt";
+    private static final String INPUT_NAME = "AdventOfCode/Year2021/Day16/input.txt";
 
     public static void main(String[] args) throws IOException {
         new Day16Code().run();

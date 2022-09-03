@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Day5 {
 
-    private static final String INPUT_NAME = "src/Year2022.Day5/input.txt";
+    private static final String INPUT_NAME = "AdventOfCode/Year2021/Day5/input.txt";
 
     public static void main(String[] args) throws IOException {
         new PartOneAndTwo().run();

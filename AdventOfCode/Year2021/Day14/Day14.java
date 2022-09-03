@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class Day14 {
 
-    private static final String INPUT_NAME = "src/Year2022.Day14/input.txt";
+    private static final String INPUT_NAME = "AdventOfCode/Year2021/Day14/input.txt";
 
     public static void main(String[] args) throws IOException {
         new Day14Code().run();

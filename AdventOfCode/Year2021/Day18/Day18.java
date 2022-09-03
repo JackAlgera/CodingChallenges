@@ -9,7 +9,7 @@ import java.util.Stack;
 
 public class Day18 {
 
-    private static final String INPUT_NAME = "src/Year2022.Day18/input.txt";
+    private static final String INPUT_NAME = "AdventOfCode/Year2021/Day18/input.txt";
 
     public static void main(String[] args) throws IOException {
         new Day18Code().run();

@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 
 public class Day22 {
 
-    private static final String INPUT_NAME = "src/Year2022.Day22/input.txt";
+    private static final String INPUT_NAME = "AdventOfCode/Year2021/Day22/input.txt";
     private static final int GRID_SIZE = 50;
 
     public static void main(String[] args) throws IOException {

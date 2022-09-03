@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class Day8 {
 
-    private static final String INPUT_NAME = "src/Year2022.Day8/input.txt";
+    private static final String INPUT_NAME = "AdventOfCode/Year2021/Day8/input.txt";
 
     public static void main(String[] args) throws IOException {
         new Day8Code().run();
@@ -218,7 +218,7 @@ public class Day8 {
                 this.segments.set(input.charAt(i) - 97, 1);
             }
         }
-        
+
         public boolean isEquals(HexadecimalEncoding e) {
             for (int i = 0; i < e.getSegments().size(); i++) {
                 if (e.getSegments().get(i) != this.getSegments().get(i)) {

@@ -10,7 +10,7 @@ public class Day21 {
 
     private static Long gamesChecked = 0L;
     private static final Long[] nbrPossibleDiceThrowsOccurrences = { 0L, 0L, 0L, 0L, 0L, 0L, 0L };
-    private static final String INPUT_NAME = "src/Year2022.Day21/input.txt";
+    private static final String INPUT_NAME = "AdventOfCode/Year2021/Day21/input.txt";
 
     public static void main(String[] args) throws IOException {
         System.out.println("-------- Day 21 --------");

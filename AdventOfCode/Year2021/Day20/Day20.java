@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Day20 {
 
-    private static final String INPUT_NAME = "src/Year2022.Day20/input.txt";
+    private static final String INPUT_NAME = "AdventOfCode/Year2021/Day20/input.txt";
 
     public static void main(String[] args) throws IOException {
         System.out.println("-------- Day 20 --------");
