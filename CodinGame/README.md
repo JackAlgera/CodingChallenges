@@ -3,7 +3,7 @@
 My CodinGame tag is [Jackalabrute](https://www.codingame.com/profile/d46b2b9844dbd087e3f67033c06dd47a9043511
 ).
 
-###List of challenges that I've participated in
+### List of challenges that I've participated in
 - Green Circle: **Wood** League, rank **XXXX/7,695**
 - Spring Challenge 2022: **Legend** League, rank **219/7,695**
 - Spring Challenge 2021: **Gold** league, **328 / 6,867**
