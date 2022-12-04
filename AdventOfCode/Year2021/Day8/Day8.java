@@ -1,6 +1,6 @@
 package Year2021.Day8;
 
-import Year2021.utils.Utilities;
+import utils.Utilities;
 
 import java.io.BufferedReader;
 import java.io.IOException;

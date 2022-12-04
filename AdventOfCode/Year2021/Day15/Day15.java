@@ -1,6 +1,6 @@
 package Year2021.Day15;
 
-import Year2021.utils.Utilities;
+import utils.Utilities;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -149,7 +149,7 @@ public class Day15 {
                     bestNodeIndex = i;
                 }
             }
-            
+
             nodes.remove(bestNodeIndex);
             return bestNode;
         }

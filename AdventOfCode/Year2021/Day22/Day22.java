@@ -1,7 +1,7 @@
 package Year2021.Day22;
 
-import Year2021.utils.Pair;
-import Year2021.utils.Utilities;
+import utils.Pair;
+import utils.Utilities;
 
 import java.io.BufferedReader;
 import java.io.IOException;

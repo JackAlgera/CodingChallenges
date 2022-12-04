@@ -1,4 +1,4 @@
-package Year2021.utils;
+package utils;
 
 public class Vector {
     private final int x, y;
