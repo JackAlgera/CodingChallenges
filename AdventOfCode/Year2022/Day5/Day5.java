@@ -4,10 +4,16 @@ import utils.Utilities;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Queue;
+import java.util.Stack;
+import java.util.regex.Pattern;
 
 public class Day5 {
 
-    private static final String INPUT_NAME = "AdventOfCode/Year2022/Day4/input.txt";
+    private static final String INPUT_NAME = "AdventOfCode/Year2022/Day5/input.txt";
+    private static final int TOTAL_STACKS = 9;
 
     public static void main(String[] args) throws IOException {
         Day5 day = new Day5();
@@ -18,46 +24,158 @@ public class Day5 {
     private void part1() throws IOException {
         BufferedReader br = Utilities.getBufferedReader(INPUT_NAME);
 
-        int totalOverlaps = 0;
+        List<Stack<String>> stacks = List.of(
+                new Stack<>(),
+                new Stack<>(),
+                new Stack<>(),
+                new Stack<>(),
+                new Stack<>(),
+                new Stack<>(),
+                new Stack<>(),
+                new Stack<>(),
+                new Stack<>()
+        );
+
+        List<String> layers = new ArrayList<>();
+        List<String> moves = new ArrayList<>();
+        String currentLayer = br.readLine();
 
         while (br.ready()) {
-            String[] elfSections = br.readLine().split(",");
-            int aStart = Integer.parseInt(elfSections[0].split("-")[0]);
-            int aEnd = Integer.parseInt(elfSections[0].split("-")[1]);
-            int bStart = Integer.parseInt(elfSections[1].split("-")[0]);
-            int bEnd = Integer.parseInt(elfSections[1].split("-")[1]);
+            String nextLayer = br.readLine();
 
-            if ((aStart <= bStart && bEnd <= aEnd) || (bStart <= aStart && aEnd <= bEnd)) {
-                totalOverlaps++;
+            if (nextLayer.equals("")) {
+                break;
+            }
+
+            layers.add(currentLayer);
+            currentLayer = nextLayer;
+        }
+
+        while (br.ready()) {
+            moves.add(br.readLine());
+        }
+
+        for (int i = layers.size() - 1; i >= 0; i--) {
+            String layer = layers.get(i);
+
+            for (int j = 0; j < TOTAL_STACKS; j++) {
+                int index = 1 + j * 4;
+
+                if (layer.length() <= index) {
+                    break;
+                }
+
+                String crate = "" + layer.charAt(index);
+
+                if (!crate.strip().equals("")) {
+                    stacks.get(j).push(crate);
+                }
             }
         }
 
-        System.out.println("-------- Day 4 - Part 1 --------");
-        System.out.println("Total overlaps: " + totalOverlaps);
-        System.out.println("Expected total overlaps: 518");
+        for (String move : moves) {
+            int nbrToMove = Integer.parseInt(move.split(" ")[1]);
+            int fromCrate = Integer.parseInt(move.split(" ")[3]) - 1;
+            int toCrate = Integer.parseInt(move.split(" ")[5]) - 1;
+
+            for (int i = 0; i < nbrToMove; i++) {
+//                System.out.print("Size of crate 1: " + stacks.get(0).size() + " - ");
+                String crate = stacks.get(fromCrate).pop();
+//                System.out.println("Movinging " + crate + " from " + (fromCrate + 1) + " to " + (toCrate + 1 ));
+                stacks.get(toCrate).push(crate);
+            }
+        }
+
+        System.out.println("-------- Day 5 - Part 1 --------");
+        System.out.print("Top layer : ");
+        stacks.forEach(stack -> {
+            String lastCrate = " ";
+            if (!stack.isEmpty()) {
+                lastCrate = stack.pop();
+            }
+            System.out.print(lastCrate);
+        });
+        System.out.println("\nExpected top layer: RFFFWBPNS");
     }
 
     private void part2() throws IOException {
         BufferedReader br = Utilities.getBufferedReader(INPUT_NAME);
 
-        int totalOverlaps = 0;
+        List<Stack<String>> stacks = List.of(
+                new Stack<>(),
+                new Stack<>(),
+                new Stack<>(),
+                new Stack<>(),
+                new Stack<>(),
+                new Stack<>(),
+                new Stack<>(),
+                new Stack<>(),
+                new Stack<>()
+        );
+
+        List<String> layers = new ArrayList<>();
+        List<String> moves = new ArrayList<>();
+        String currentLayer = br.readLine();
 
         while (br.ready()) {
-            String[] elfSections = br.readLine().split(",");
-            int aStart = Integer.parseInt(elfSections[0].split("-")[0]);
-            int aEnd = Integer.parseInt(elfSections[0].split("-")[1]);
-            int bStart = Integer.parseInt(elfSections[1].split("-")[0]);
-            int bEnd = Integer.parseInt(elfSections[1].split("-")[1]);
+            String nextLayer = br.readLine();
 
-            if (aEnd < bStart || bEnd < aStart ) {
-                continue;
+            if (nextLayer.equals("")) {
+                break;
             }
 
-            totalOverlaps++;
+            layers.add(currentLayer);
+            currentLayer = nextLayer;
         }
 
-        System.out.println("-------- Day 4 - Part 2 --------");
-        System.out.println("Total overlaps: " + totalOverlaps);
-        System.out.println("Expected total overlaps: 909");
+        while (br.ready()) {
+            moves.add(br.readLine());
+        }
+
+        for (int i = layers.size() - 1; i >= 0; i--) {
+            String layer = layers.get(i);
+
+            for (int j = 0; j < TOTAL_STACKS; j++) {
+                int index = 1 + j * 4;
+
+                if (layer.length() <= index) {
+                    break;
+                }
+
+                String crate = "" + layer.charAt(index);
+
+                if (!crate.strip().equals("")) {
+                    stacks.get(j).push(crate);
+                }
+            }
+        }
+
+        for (String move : moves) {
+            int nbrToMove = Integer.parseInt(move.split(" ")[1]);
+            int fromCrate = Integer.parseInt(move.split(" ")[3]) - 1;
+            int toCrate = Integer.parseInt(move.split(" ")[5]) - 1;
+
+            String crateOrder = "";
+            for (int i = 0; i < nbrToMove; i++) {
+//                System.out.print("Size of crate 1: " + stacks.get(0).size() + " - ");
+                crateOrder = stacks.get(fromCrate).pop() + crateOrder;
+//                System.out.println("Movinging " + crate + " from " + (fromCrate + 1) + " to " + (toCrate + 1 ));
+            }
+
+            for (int i = 0; i < crateOrder.length(); i++) {
+                stacks.get(toCrate).push("" + crateOrder.charAt(i));
+            }
+        }
+
+        System.out.println("-------- Day 5 - Part 2 --------");
+        System.out.print("Top layer : ");
+        stacks.forEach(stack -> {
+            String lastCrate = " ";
+            if (!stack.isEmpty()) {
+                lastCrate = stack.pop();
+            }
+            System.out.print(lastCrate);
+        });
+        System.out.println("\nExpected top layer: CQQBBJFCS");
     }
 }
