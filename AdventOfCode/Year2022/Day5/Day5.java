@@ -79,9 +79,7 @@ public class Day5 {
             int toCrate = Integer.parseInt(move.split(" ")[5]) - 1;
 
             for (int i = 0; i < nbrToMove; i++) {
-//                System.out.print("Size of crate 1: " + stacks.get(0).size() + " - ");
                 String crate = stacks.get(fromCrate).pop();
-//                System.out.println("Movinging " + crate + " from " + (fromCrate + 1) + " to " + (toCrate + 1 ));
                 stacks.get(toCrate).push(crate);
             }
         }
@@ -157,9 +155,7 @@ public class Day5 {
 
             String crateOrder = "";
             for (int i = 0; i < nbrToMove; i++) {
-//                System.out.print("Size of crate 1: " + stacks.get(0).size() + " - ");
                 crateOrder = stacks.get(fromCrate).pop() + crateOrder;
-//                System.out.println("Movinging " + crate + " from " + (fromCrate + 1) + " to " + (toCrate + 1 ));
             }
 
             for (int i = 0; i < crateOrder.length(); i++) {
