@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Stack;
+import java.util.regex.Pattern;
 
 public class Day13 {
 
@@ -16,6 +17,7 @@ public class Day13 {
     public static void main(String[] args) throws IOException {
         Day13 day = new Day13();
         day.part1();
+        day.part2();
     }
 
     private void part1() throws IOException {
@@ -27,8 +29,6 @@ public class Day13 {
             pairsChecked++;
             Node firstPacket = new Node();
             generateNode(firstPacket, br.readLine().substring(1));
-//            firstPacket.printTree();
-//            System.out.println("\nNext\n");
             Node secondPacket = new Node();
             generateNode(secondPacket, br.readLine().substring(1));
             br.readLine();
@@ -36,56 +36,101 @@ public class Day13 {
             boolean inCorrectOrder = compare(firstPacket, secondPacket);
             if (inCorrectOrder) {
                 sum += pairsChecked;
-//                System.out.println("Is in correct order ? " + inCorrectOrder + " \n");
-
             }
         }
+
+        System.out.println("\n-------- Day 13 - Part 1 --------");
         System.out.println("Pairs checked: " + pairsChecked + " - sum correct order: " + sum);
+        System.out.println("Expected sum correct order: 5555");
     }
 
-    public boolean compare(Node left, Node right) {
-        if (left.isEmptyAndNull() && right.isEmptyAndNull()) {
-            return true;
+    private void part2() throws IOException {
+        BufferedReader br = Utilities.getBufferedReader(INPUT_NAME);
+
+        List<Node> packets = new ArrayList<>();
+        Node firstDivider = new Node(null, List.of(new Node(2)));
+        Node secondDivider = new Node(null, List.of(new Node(6)));
+        packets.add(firstDivider);
+        packets.add(secondDivider);
+
+        while (br.ready()) {
+            String line = br.readLine();
+
+            if (line.equals("")) {
+                continue;
+            }
+
+            Node packet = new Node();
+            generateNode(packet, line.substring(1));
+            packets.add(packet);
         }
 
-        if (left.isEmptyAndNull() && right.hasSomething()) {
-            return true;
-        }
+        packets.sort((p1, p2) -> {
+            Boolean val = compare(p1, p2);
 
-        if (left.hasSomething() && right.isEmptyAndNull()) {
-            return false;
-        }
+            if (val == null) {
+                return 0;
+            }
 
+            return val ? -1 : 1;
+        });
+
+        System.out.println("\n-------- Day 13 - Part 2 --------");
+        System.out.println("Multiply together: " + ((packets.indexOf(firstDivider) + 1) * (packets.indexOf(secondDivider) + 1)));
+        System.out.println("Expected multiply together: 22852");
+    }
+
+    public Boolean compare(Node left, Node right) {
         if (left.isValue() && right.isValue()) {
-            return left.getValue() <= right.getValue();
-        }
+            if (left.getValue() < right.getValue()) {
+                return true;
+            }
 
-        if (left.isValue() && !right.isValue()) {
-            if (right.getChildren().size() > 1) {
+            if (left.getValue() > right.getValue()) {
                 return false;
             }
 
-            return compare(left, right.getChildren().get(0));
+            return null;
         }
 
-        if (!left.isValue() && right.isValue()) {
-            return compare(left.getChildren().get(0), right);
-        }
+        if (left.isList() && right.isList()) {
+            int maxSize = Math.max(left.getChildren().size(), right.getChildren().size());
+            boolean isSameSize = left.getChildren().size() == right.getChildren().size();
 
-        if (!left.isValue() && !right.isValue()) {
-            if (left.getChildren().size() > right.getChildren().size()) {
-                return false;
+            Boolean response = null;
+
+            for (int i = 0; i < maxSize; i++) {
+                if (!isSameSize && i > left.getChildren().size() - 1) {
+                    return true;
+                }
+
+                if (!isSameSize && i > right.getChildren().size() - 1) {
+                    return false;
+                }
+
+                response = compare(left.getChildren().get(i), right.getChildren().get(i));
+
+                if (response != null) {
+                    return response;
+                }
             }
 
-            boolean inCorrectOrder = true;
-            for (int i = 0; i < left.getChildren().size(); i++) {
-                inCorrectOrder = inCorrectOrder & compare(left.getChildren().get(i), right.getChildren().get(i));
-            }
-
-            return inCorrectOrder;
+            return response;
         }
 
-        return true;
+        if (left.isList() && right.isValue()) {
+            right.addChildren(new Node(right.getValue(), right));
+            right.setValue(null);
+            return compare(left, right);
+        }
+
+        if (left.isValue() && right.isList()) {
+            left.addChildren(new Node(left.getValue(), left));
+            left.setValue(null);
+            return compare(left, right);
+        }
+
+        return null;
     }
 
     public void generateNode(Node root, String input) {
@@ -112,9 +157,20 @@ public class Day13 {
             return;
         }
 
+        Pattern pattern = Pattern.compile("\\d");
+        int i;
+
+        for (i = 1; i < input.length(); i++) {
+            if (pattern.matcher("" + input.charAt(i)).find()) {
+                val += "" + input.charAt(i);
+            } else {
+                break;
+            }
+        }
         Node child = new Node(Integer.parseInt(val), root);
+
         root.addChildren(child);
-        generateNode(root, input.substring(1));
+        generateNode(root, input.substring(i));
     }
 
     private class Node {
@@ -132,30 +188,27 @@ public class Day13 {
             this.children = new ArrayList<>();
         }
 
+        public Node(Integer value, List<Node> children) {
+            this.value = value;
+            this.children = children;
+        }
+
         public Node(Integer value, Node parent) {
             this.value = value;
             this.parent = parent;
             this.children = new ArrayList<>();
         }
 
-        public boolean isEmptyAndNull() {
-            return children.isEmpty() && value == null;
-        }
-
-        public boolean hasSomething() {
-            return children.isEmpty() || value != null;
-        }
-
         public boolean isValue() {
-            return children.isEmpty();
+            return children.isEmpty() && value != null;
+        }
+
+        public boolean isList() {
+            return value == null;
         }
 
         public Node getParent() {
             return parent;
-        }
-
-        public void setParent(Node parent) {
-            this.parent = parent;
         }
 
         public Integer getValue() {
@@ -189,5 +242,3 @@ public class Day13 {
         }
     }
 }
-
-// 561 -> too low
