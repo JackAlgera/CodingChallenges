@@ -1,14 +1,12 @@
 package Year2022.Day2;
 
-import utils.Utilities;
+import utils.Day;
 
-import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
-public class Day2 {
-
-    private static final String INPUT_NAME = "AdventOfCode/Year2022/Day2/input.txt";
+public class Day2 extends Day {
 
     private static final Map<String, Integer> points = Map.of(
             "A X", 3, // 0 + 3,
@@ -24,21 +22,26 @@ public class Day2 {
 
     public static void main(String[] args) throws IOException {
         Day2 day = new Day2();
-        day.partTwo();
+
+        List<String> sampleInput = extractSampleInputLines(day.getName());
+        List<String> mainInput = extractMainInputLines(day.getName());
+
+        printAllResults(1, day.getName(),
+            day.part1(sampleInput), 15,
+            day.part1(mainInput), 10404);
+
+        printAllResults(2, day.getName(),
+            day.part2(sampleInput), 12,
+            day.part2(mainInput), 10334);
     }
 
-    private void partTwo() throws IOException {
-        BufferedReader br = Utilities.getBufferedReader(INPUT_NAME);
+    @Override
+    public long part1(List<String> lines) throws IOException {
+        return 0;
+    }
 
-        int totalPoints = 0;
-
-        while (br.ready()) {
-            String line = br.readLine();
-            totalPoints += points.get(line);
-        }
-
-        System.out.println("-------- Day 2 --------");
-        System.out.println("Final score: " + totalPoints);
-        System.out.println("Expected score: 10334");
+    @Override
+    public long part2(List<String> lines) throws IOException {
+        return lines.stream().mapToInt(points::get).sum();
     }
 }
