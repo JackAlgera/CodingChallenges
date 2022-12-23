@@ -25,13 +25,13 @@ public abstract class Day {
 
     public static void printAllResults(int part, String dayName, long sampleResult1, long expectedSampleResult1, long sampleResult2, long expectedSampleResult2) {
         System.out.printf("\n-------- %s - Part %d --------%n", dayName, part);
-        System.out.println("------------ Sample -----------");
-        System.out.println("Result: " + sampleResult1);
-        System.out.println("Expected result: " + expectedSampleResult1);
+        System.out.println("Sample:");
+        System.out.println("- Result: " + sampleResult1);
+        System.out.println("- Expected result: " + expectedSampleResult1);
 
-        System.out.println("------------- Main ------------");
-        System.out.println("Result: " + sampleResult2);
-        System.out.println("Expected result: " + expectedSampleResult2);
+        System.out.println("Main:");
+        System.out.println("- Result: " + sampleResult2);
+        System.out.println("- Expected result: " + expectedSampleResult2);
     }
 
     public abstract long part1(List<String> lines) throws IOException;
