@@ -1,28 +1,33 @@
 package Year2022.Day3;
 
-import utils.Utilities;
+import utils.Day;
 
-import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.List;
 import java.util.regex.Pattern;
 
-public class Day3 {
-
-    private static final String INPUT_NAME = "AdventOfCode/Year2022/Day3/input.txt";
+public class Day3 extends Day {
 
     public static void main(String[] args) throws IOException {
         Day3 day = new Day3();
-        day.part1();
-        day.part2();
+
+        List<String> sampleInput = extractSampleInputLines(day.getName());
+        List<String> mainInput = extractMainInputLines(day.getName());
+
+        printAllResults(1, day.getName(),
+            day.part1(sampleInput), 157,
+            day.part1(mainInput), 8252);
+
+        printAllResults(2, day.getName(),
+            day.part2(sampleInput), 70,
+            day.part2(mainInput), 2828);
     }
 
-    private void part1() throws IOException {
-        BufferedReader br = Utilities.getBufferedReader(INPUT_NAME);
-
+    @Override
+    public long part1(List<String> lines) throws IOException {
         int totalPoints = 0;
 
-        while (br.ready()) {
-            String line = br.readLine();
+        for (String line : lines) {
             String firstCompartment = line.substring(0, line.length()/2);
             String secondCompartment = line.substring(line.length()/2);
 
@@ -41,21 +46,18 @@ public class Day3 {
             }
         }
 
-        System.out.println("-------- Day 3 - Part 1 --------");
-        System.out.println("Sum of priorities: " + totalPoints);
-        System.out.println("Expected sum of priorities: 8252");
+        return totalPoints;
     }
 
-    private void part2() throws IOException {
-        BufferedReader br = Utilities.getBufferedReader(INPUT_NAME);
-
+    @Override
+    public long part2(List<String> lines) throws IOException {
         String items = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
         int total = 0;
 
-        while (br.ready()) {
-            String firstElf = br.readLine();
-            String secondElf = br.readLine();
-            String thirdElf = br.readLine();
+        for (int k = 0; k < lines.size() / 3; k++) {
+            String firstElf = lines.get(k * 3);
+            String secondElf = lines.get(k * 3 + 1);
+            String thirdElf = lines.get(k * 3 + 2);
 
             for (int i = 0; i < items.length(); i++) {
                 char val = items.charAt(i);
@@ -70,9 +72,6 @@ public class Day3 {
                 }
             }
         }
-
-        System.out.println("-------- Day 3 - Part 2 --------");
-        System.out.println("Sum of priorities: " + total);
-        System.out.println("Expected sum of priorities: 2828");
+        return total;
     }
 }
