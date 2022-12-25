@@ -1,14 +1,19 @@
 package Year2022.Day23;
 
 import utils.Day;
+import utils.enums.Direction;
 
 import java.io.IOException;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-public class Day23 extends Day {
+public class Day23 extends Day<Integer> {
+
+    public static final List<Direction> DEFAULT_DIRECTIONS = List.of(
+        Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST
+    );
 
     public static void main(String[] args) throws IOException {
         Day23 day = new Day23();
@@ -16,22 +21,19 @@ public class Day23 extends Day {
         List<String> sampleInput = extractSampleInputLines(day.getName());
         List<String> mainInput = extractMainInputLines(day.getName());
 
-        printAllResults(1, day.getName(),
+        day.printAllResults(1, day.getName(),
             day.part1(sampleInput), 110,
             day.part1(mainInput), 4034);
 
-        printAllResults(2, day.getName(),
+        day.printAllResults(2, day.getName(),
             day.part2(sampleInput), 20,
             day.part2(mainInput), 960);
     }
 
     @Override
-    public long part1(List<String> lines) throws IOException {
+    public Integer part1(List<String> lines) throws IOException {
         List<Elf> elves = extractElves(lines);
-
-        List<Direction> directions = new ArrayList<>(List.of(
-            Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST
-        ));
+        List<Direction> directions = new ArrayList<>(DEFAULT_DIRECTIONS);
 
         for (int k = 0; k < 10; k++) {
             playRound(elves, directions);
@@ -41,12 +43,9 @@ public class Day23 extends Day {
     }
 
     @Override
-    public long part2(List<String> lines) throws IOException {
+    public Integer part2(List<String> lines) throws IOException {
         List<Elf> elves = extractElves(lines);
-
-        List<Direction> directions = new ArrayList<>(List.of(
-            Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST
-        ));
+        List<Direction> directions = new ArrayList<>(DEFAULT_DIRECTIONS);
 
         int totalRounds = 1;
         while (playRound(elves, directions)) {
@@ -78,7 +77,7 @@ public class Day23 extends Day {
         return (maxI - minI + 1) * (maxJ - minJ + 1) - elves.size();
     }
 
-    public boolean[][] generateGrid(List<Elf> elves) {
+    public boolean[][] generateGridWithBorder(List<Elf> elves) {
         int maxI = 0, maxJ = 0;
 
         for (Elf elf : elves) {
@@ -129,7 +128,7 @@ public class Day23 extends Day {
     public boolean playRound(List<Elf> elves, List<Direction> directions) {
         List<Move> moves = new ArrayList<>();
         Map<Integer, Map<Integer, Integer>> moveCount = new HashMap<>();
-        boolean[][] grid = generateGrid(elves);
+        boolean[][] grid = generateGridWithBorder(elves);
 
         for (Elf elf : elves) {
             if (!elf.hasNeighbor(grid)) {
@@ -228,9 +227,5 @@ public class Day23 extends Day {
             this.i = move.i();
             this.j = move.j();
         }
-    }
-
-    public enum Direction {
-        NORTH, EAST, SOUTH, WEST
     }
 }

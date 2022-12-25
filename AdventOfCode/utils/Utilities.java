@@ -45,12 +45,12 @@ public class Utilities {
 
     /**
      * Tile indices for the 8 neighbors following neighbors of a tile:
-     * TOP_LEFT, TOP, TOP_RIGHT, LEFT, CENTER, RIGHT, BOTTOM_LEFT, BOTTOM, BOTTOM_RIGHT
+     * TOP_LEFT, TOP, TOP_RIGHT, LEFT, RIGHT, BOTTOM_LEFT, BOTTOM, BOTTOM_RIGHT
      * NEIGHBORS_8[0] -> Rows (i)
      * NEIGHBORS_8[1] -> Columns (j)
      */
     public static int[][] NEIGHBORS_8 = new int[][]{
-        { -1, -1, -1, 0, 0, 0, 1, 1, 1 },
-        { -1, 0, 1, -1, 0, 1, -1, 0, 1 }
+        { -1, -1, -1, 0, 0, 1, 1, 1 },
+        { -1, 0, 1, -1, 1, -1, 0, 1 }
     };
 }
