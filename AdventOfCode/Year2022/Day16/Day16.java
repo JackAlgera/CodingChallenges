@@ -1,7 +1,6 @@
 package Year2022.Day16;
 
 import utils.Day;
-import utils.Pair;
 
 import java.io.IOException;
 import java.util.*;
@@ -9,7 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class Day16 extends Day {
+public class Day16 extends Day<Integer> {
 
     public static void main(String[] args) throws IOException {
         Day16 day = new Day16();
@@ -17,17 +16,17 @@ public class Day16 extends Day {
         List<String> sampleInput = extractSampleInputLines(day.getName());
         List<String> mainInput = extractMainInputLines(day.getName());
 
-        printAllResults(1, day.getName(),
+        day.printAllResults(1, day.getName(),
             day.part1(sampleInput), 1651,
             day.part1(mainInput), 2114);
 
-        printAllResults(2, day.getName(),
+        day.printAllResults(2, day.getName(),
             day.part2(sampleInput), 1707,
             day.part2(mainInput), 2666);
     }
 
     @Override
-    public long part1(List<String> lines) throws IOException {
+    public Integer part1(List<String> lines) throws IOException {
         int maxTime = 30;
         Map<String, Node> nodeMap = lines.stream().map(this::extractValve).collect(Collectors.toMap(Node::id, n -> n));
         Map<String, Map<String, Integer>> shortestDistances = getShortestDistances(nodeMap);
@@ -55,7 +54,7 @@ public class Day16 extends Day {
     }
 
     @Override
-    public long part2(List<String> lines) throws IOException {
+    public Integer part2(List<String> lines) throws IOException {
         int maxTime = 26;
         Map<String, Node> nodeMap = lines.stream().map(this::extractValve).collect(Collectors.toMap(Node::id, n -> n));
         Map<String, Map<String, Integer>> shortestDistances = getShortestDistances(nodeMap);
