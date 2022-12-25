@@ -5,7 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public abstract class Day {
+public abstract class Day<T> {
 
     public String getName() {
         return getClass().getSimpleName();
@@ -23,7 +23,7 @@ public abstract class Day {
         return String.format("AdventOfCode/Year2022/%s/%s.txt", day, fileName);
     }
 
-    public static void printAllResults(int part, String dayName, long sampleResult1, long expectedSampleResult1, long sampleResult2, long expectedSampleResult2) {
+    public void printAllResults(int part, String dayName, T sampleResult1, T expectedSampleResult1, T sampleResult2, T expectedSampleResult2) {
         System.out.printf("\n-------- %s - Part %d --------%n", dayName, part);
         System.out.println("Sample:");
         System.out.println("- Result: " + sampleResult1);
@@ -34,7 +34,7 @@ public abstract class Day {
         System.out.println("- Expected result: " + expectedSampleResult2);
     }
 
-    public abstract long part1(List<String> lines) throws IOException;
+    public abstract T part1(List<String> lines) throws IOException;
 
-    public abstract long part2(List<String> lines) throws IOException;
+    public abstract T part2(List<String> lines) throws IOException;
 }
