@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class Day3 extends Day {
+public class Day3 extends Day<Integer> {
 
     public static void main(String[] args) throws IOException {
         Day3 day = new Day3();
@@ -14,17 +14,17 @@ public class Day3 extends Day {
         List<String> sampleInput = extractSampleInputLines(day.getName());
         List<String> mainInput = extractMainInputLines(day.getName());
 
-        printAllResults(1, day.getName(),
+        day.printAllResults(1, day.getName(),
             day.part1(sampleInput), 157,
             day.part1(mainInput), 8252);
 
-        printAllResults(2, day.getName(),
+        day.printAllResults(2, day.getName(),
             day.part2(sampleInput), 70,
             day.part2(mainInput), 2828);
     }
 
     @Override
-    public long part1(List<String> lines) throws IOException {
+    public Integer part1(List<String> lines) throws IOException {
         int totalPoints = 0;
 
         for (String line : lines) {
@@ -50,7 +50,7 @@ public class Day3 extends Day {
     }
 
     @Override
-    public long part2(List<String> lines) throws IOException {
+    public Integer part2(List<String> lines) throws IOException {
         String items = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
         int total = 0;
 

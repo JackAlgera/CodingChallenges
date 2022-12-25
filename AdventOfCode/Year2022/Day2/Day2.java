@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-public class Day2 extends Day {
+public class Day2 extends Day<Integer> {
 
     private static final Map<String, Integer> points = Map.of(
             "A X", 3, // 0 + 3,
@@ -26,22 +26,22 @@ public class Day2 extends Day {
         List<String> sampleInput = extractSampleInputLines(day.getName());
         List<String> mainInput = extractMainInputLines(day.getName());
 
-        printAllResults(1, day.getName(),
+        day.printAllResults(1, day.getName(),
             day.part1(sampleInput), 15,
             day.part1(mainInput), 10404);
 
-        printAllResults(2, day.getName(),
+        day.printAllResults(2, day.getName(),
             day.part2(sampleInput), 12,
             day.part2(mainInput), 10334);
     }
 
     @Override
-    public long part1(List<String> lines) throws IOException {
+    public Integer part1(List<String> lines) throws IOException {
         return 0;
     }
 
     @Override
-    public long part2(List<String> lines) throws IOException {
+    public Integer part2(List<String> lines) throws IOException {
         return lines.stream().mapToInt(points::get).sum();
     }
 }
