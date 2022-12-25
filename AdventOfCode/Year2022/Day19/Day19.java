@@ -3,12 +3,12 @@ package Year2022.Day19;
 import utils.Day;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.List;
 import java.util.stream.IntStream;
 
-public class Day19 extends Day {
+public class Day19 extends Day<Integer> {
 
     public static void main(String[] args) throws IOException {
         Day19 day = new Day19();
@@ -16,17 +16,17 @@ public class Day19 extends Day {
         List<String> sampleInput = extractSampleInputLines(day.getName());
         List<String> mainInput = extractMainInputLines(day.getName());
 
-        printAllResults(1, day.getName(),
+        day.printAllResults(1, day.getName(),
             day.part1(sampleInput), 33,
             day.part1(mainInput), 1675);
 
-        printAllResults(2, day.getName(),
+        day.printAllResults(2, day.getName(),
             day.part2(sampleInput), 3472,
             day.part2(mainInput), 6840);
     }
 
     @Override
-    public long part1(List<String> lines) throws IOException {
+    public Integer part1(List<String> lines) throws IOException {
         List<State> blueprints = lines.stream()
                 .map(l -> parseState(l, 24))
                 .toList();
@@ -37,7 +37,7 @@ public class Day19 extends Day {
     }
 
     @Override
-    public long part2(List<String> lines) throws IOException {
+    public Integer part2(List<String> lines) throws IOException {
         List<State> blueprints = lines.stream()
             .map(l -> parseState(l, 32))
             .toList();
@@ -50,12 +50,10 @@ public class Day19 extends Day {
 
     public int bfs(State initState) {
         int maxGeodeCount = 0;
-//        int totalSteps = 0;
         Deque<State> queue = new ArrayDeque<>();
         queue.add(initState);
 
         while (!queue.isEmpty()) {
-//            totalSteps++;
             State state = queue.poll();
 
             int bestPossibleGeodeCount =
