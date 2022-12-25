@@ -60,14 +60,14 @@ public class Day17 {
         int bestHeight = Integer.MIN_VALUE;
         Vector bestVelocity = initVelocities.get(0);
         for (Vector initVelocity : initVelocities) {
-            int height = getMaxHeight(initVelocity.getY());
+            int height = getMaxHeight(initVelocity.y());
             if (height > bestHeight) {
                 bestHeight = height;
                 bestVelocity = initVelocity;
             }
         }
 
-        System.out.println("Best velocity (" + bestVelocity.getX() + ", " + bestVelocity.getY() + "), with max height " + bestHeight);
+        System.out.println("Best velocity (" + bestVelocity.x() + ", " + bestVelocity.y() + "), with max height " + bestHeight);
         System.out.println("Distinct velocities : " + initVelocities.size());
     }
 
