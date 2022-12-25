@@ -31,4 +31,26 @@ public class Utilities {
     public static BufferedReader getBufferedReader(String dayInput) throws FileNotFoundException {
         return new BufferedReader(new FileReader(dayInput));
     }
+
+    /**
+     * Tile indices for the 4 neighbors following neighbors of a tile:
+     * TOP, RIGHT, BOTTOM, LEFT
+     * NEIGHBORS_4[0] -> Rows (i)
+     * NEIGHBORS_4[1] -> Columns (j)
+     */
+    public static int[][] NEIGHBORS_4 = new int[][]{
+        { -1, 0, 1, 0 },
+        { 0, 1, 0, -1 }
+    };
+
+    /**
+     * Tile indices for the 8 neighbors following neighbors of a tile:
+     * TOP_LEFT, TOP, TOP_RIGHT, LEFT, CENTER, RIGHT, BOTTOM_LEFT, BOTTOM, BOTTOM_RIGHT
+     * NEIGHBORS_8[0] -> Rows (i)
+     * NEIGHBORS_8[1] -> Columns (j)
+     */
+    public static int[][] NEIGHBORS_8 = new int[][]{
+        { -1, -1, -1, 0, 0, 0, 1, 1, 1 },
+        { -1, 0, 1, -1, 0, 1, -1, 0, 1 }
+    };
 }
