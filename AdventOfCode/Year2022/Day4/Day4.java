@@ -1,27 +1,35 @@
 package Year2022.Day4;
 
+import utils.Day;
 import utils.Utilities;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.List;
 
-public class Day4 {
-
-    private static final String INPUT_NAME = "AdventOfCode/Year2022/Day4/input.txt";
+public class Day4 extends Day<Integer> {
 
     public static void main(String[] args) throws IOException {
         Day4 day = new Day4();
-        day.part1();
-        day.part2();
+
+        List<String> sampleInput = extractSampleInputLines(day.getName());
+        List<String> mainInput = extractMainInputLines(day.getName());
+
+        day.printAllResults(1, day.getName(),
+            day.part1(sampleInput), 2,
+            day.part1(mainInput), 518);
+
+        day.printAllResults(2, day.getName(),
+            day.part2(sampleInput), 4,
+            day.part2(mainInput), 909);
     }
 
-    private void part1() throws IOException {
-        BufferedReader br = Utilities.getBufferedReader(INPUT_NAME);
-
+    @Override
+    public Integer part1(List<String> lines) throws IOException {
         int totalOverlaps = 0;
 
-        while (br.ready()) {
-            String[] elfSections = br.readLine().split(",");
+        for (String line : lines) {
+            String[] elfSections = line.split(",");
             int aStart = Integer.parseInt(elfSections[0].split("-")[0]);
             int aEnd = Integer.parseInt(elfSections[0].split("-")[1]);
             int bStart = Integer.parseInt(elfSections[1].split("-")[0]);
@@ -32,18 +40,14 @@ public class Day4 {
             }
         }
 
-        System.out.println("-------- Day 4 - Part 1 --------");
-        System.out.println("Total overlaps: " + totalOverlaps);
-        System.out.println("Expected total overlaps: 518");
+        return totalOverlaps;
     }
 
-    private void part2() throws IOException {
-        BufferedReader br = Utilities.getBufferedReader(INPUT_NAME);
-
+    @Override
+    public Integer part2(List<String> lines) throws IOException {
         int totalOverlaps = 0;
-
-        while (br.ready()) {
-            String[] elfSections = br.readLine().split(",");
+        for (String line : lines) {
+            String[] elfSections = line.split(",");
             int aStart = Integer.parseInt(elfSections[0].split("-")[0]);
             int aEnd = Integer.parseInt(elfSections[0].split("-")[1]);
             int bStart = Integer.parseInt(elfSections[1].split("-")[0]);
@@ -56,8 +60,6 @@ public class Day4 {
             totalOverlaps++;
         }
 
-        System.out.println("-------- Day 4 - Part 2 --------");
-        System.out.println("Total overlaps: " + totalOverlaps);
-        System.out.println("Expected total overlaps: 909");
+        return totalOverlaps;
     }
 }
