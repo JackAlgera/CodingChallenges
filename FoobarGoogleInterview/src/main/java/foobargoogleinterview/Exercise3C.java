@@ -1,4 +1,4 @@
-package FoobarGoogleInterview;
+package foobargoogleinterview;
 
 public class Exercise3C {
     public static void main(String[] args) {

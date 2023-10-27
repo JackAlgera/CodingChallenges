@@ -1,4 +1,4 @@
-package FoobarGoogleInterview;
+package foobargoogleinterview;
 
 import java.math.BigInteger;
 import java.util.LinkedList;

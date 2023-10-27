@@ -1,4 +1,4 @@
-package FoobarGoogleInterview;
+package foobargoogleinterview;
 
 import java.util.HashMap;
 import java.util.Map;
