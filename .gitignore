@@ -1,4 +1,10 @@
+*/.gradle
+*/gradle/
+*/build
 /out
 *.iml
+
+*/**/.DS_Store
+.DS_Store
 
 .idea
