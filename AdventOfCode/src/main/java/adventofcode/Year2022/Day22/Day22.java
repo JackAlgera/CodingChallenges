@@ -11,8 +11,18 @@ import java.util.regex.Pattern;
 
 public class Day22 extends Day<Integer> {
 
+    public static void main(String[] args) throws Exception {
+        Day22 day = new Day22();
+
+        day.printPart1("sample-input", 6032);
+        day.printPart1("input", 191010);
+
+        day.printPart2("sample-input", 5031);
+        day.printPart2("input", 960);
+    }
+
     // min included, max excluded
-    private static final List<Area> SAMPLE_AREAS = List.of(
+    private final List<Area> SAMPLE_AREAS = List.of(
         new Area(0, 0, 4, 8, 12),
         new Area(1, 4, 8, 0, 4),
         new Area(2, 4, 8, 4, 8),
@@ -22,7 +32,7 @@ public class Day22 extends Day<Integer> {
     );
 
     // min included, max excluded
-    private static final List<Area> INPUT_AREAS = List.of(
+    private final List<Area> INPUT_AREAS = List.of(
         new Area(0, 0, 50, 50, 100),
         new Area(1, 0, 50, 100, 150),
         new Area(2, 50, 100, 50, 100),
@@ -31,23 +41,7 @@ public class Day22 extends Day<Integer> {
         new Area(5, 150, 200, 0, 50)
     );
 
-    private static boolean isSample = true;
-
-    public static void main(String[] args) throws Exception {
-        Day22 day = new Day22();
-
-        List<String> sampleInput = extractSampleInputLines(day.getName());
-        List<String> mainInput = extractMainInputLines(day.getName());
-
-        day.printAllResults(1, day.getName(),
-            day.part1(sampleInput), 6032,
-            day.part1(mainInput), 191010);
-
-        day.printAllResults(2, day.getName(),
-            day.part2(sampleInput), 5031,
-//            1, 960);
-            day.part2(mainInput), 960);
-    }
+    private boolean isSample = true;
 
     @Override
     public Integer part1(List<String> lines) throws IOException {

@@ -8,6 +8,16 @@ import java.util.Map;
 
 public class Day2 extends Day<Integer> {
 
+    public static void main(String[] args) throws IOException {
+        Day2 day = new Day2();
+
+        day.printPart1("sample-input", 15);
+        day.printPart1("input", 10404);
+
+        day.printPart2("sample-input", 12);
+        day.printPart2("input", 10334);
+    }
+
     private static final Map<String, Integer> points = Map.of(
             "A X", 3, // 0 + 3,
             "A Y", 4, // 3 + 1,
@@ -19,21 +29,6 @@ public class Day2 extends Day<Integer> {
             "C Y", 6, // 3 + 3,
             "C Z", 7 // 6 + 1
     );
-
-    public static void main(String[] args) throws IOException {
-        Day2 day = new Day2();
-
-        List<String> sampleInput = extractSampleInputLines(day.getName());
-        List<String> mainInput = extractMainInputLines(day.getName());
-
-        day.printAllResults(1, day.getName(),
-            day.part1(sampleInput), 15,
-            day.part1(mainInput), 10404);
-
-        day.printAllResults(2, day.getName(),
-            day.part2(sampleInput), 12,
-            day.part2(mainInput), 10334);
-    }
 
     @Override
     public Integer part1(List<String> lines) throws IOException {

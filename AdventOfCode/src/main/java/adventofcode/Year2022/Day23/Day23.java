@@ -18,16 +18,11 @@ public class Day23 extends Day<Integer> {
     public static void main(String[] args) throws IOException {
         Day23 day = new Day23();
 
-        List<String> sampleInput = extractSampleInputLines(day.getName());
-        List<String> mainInput = extractMainInputLines(day.getName());
+        day.printPart1("sample-input", 110);
+        day.printPart1("input", 4034);
 
-        day.printAllResults(1, day.getName(),
-            day.part1(sampleInput), 110,
-            day.part1(mainInput), 4034);
-
-        day.printAllResults(2, day.getName(),
-            day.part2(sampleInput), 20,
-            day.part2(mainInput), 960);
+        day.printPart2("sample-input", 20);
+        day.printPart2("input", 960);
     }
 
     @Override

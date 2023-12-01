@@ -10,16 +10,11 @@ public class Day11 extends Day<Long> {
     public static void main(String[] args) throws IOException {
         Day11 day = new Day11();
 
-        List<String> sampleInput = extractSampleInputLines(day.getName());
-        List<String> mainInput = extractMainInputLines(day.getName());
+        day.printPart1("sample-input", 10605L);
+        day.printPart1("input", 57838L);
 
-        day.printAllResults(1, day.getName(),
-            day.part1(sampleInput), 10605L,
-            day.part1(mainInput), 57838L);
-
-        day.printAllResults(2, day.getName(),
-            day.part2(sampleInput), 2713310158L,
-            day.part2(mainInput), 15050382231L);
+        day.printPart2("sample-input", 2713310158L);
+        day.printPart2("input", 15050382231L);
     }
 
     @Override

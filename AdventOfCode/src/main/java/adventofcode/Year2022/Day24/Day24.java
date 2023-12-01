@@ -7,27 +7,22 @@ import java.util.*;
 
 public class Day24 extends Day<Integer> {
 
-    public static Map<Character, Vector> DIRECTIONS = Map.of(
+    public static void main(String[] args) throws IOException {
+        Day24 day = new Day24();
+
+        day.printPart1("sample-input", 18);
+        day.printPart1("input", 269);
+
+        day.printPart2("sample-input", 54);
+        day.printPart2("input", 825);
+    }
+
+    public Map<Character, Vector> DIRECTIONS = Map.of(
         '^', new Vector(-1, 0),
         'v', new Vector(1, 0),
         '>', new Vector(0, 1),
         '<', new Vector(0, -1)
     );
-
-    public static void main(String[] args) throws IOException {
-        Day24 day = new Day24();
-
-        List<String> sampleInput = extractSampleInputLines(day.getName());
-        List<String> mainInput = extractMainInputLines(day.getName());
-
-        day.printAllResults(1, day.getName(),
-            day.part1(sampleInput), 18,
-            day.part1(mainInput), 269);
-
-        day.printAllResults(2, day.getName(),
-            day.part2(sampleInput), 54,
-            day.part2(mainInput), 825);
-    }
 
     @Override
     public Integer part1(List<String> lines) throws IOException {
@@ -41,7 +36,6 @@ public class Day24 extends Day<Integer> {
             lines
         );
     }
-
 
     @Override
     public Integer part2(List<String> lines) throws IOException {
@@ -60,7 +54,7 @@ public class Day24 extends Day<Integer> {
         );
     }
 
-    private static int getShortestPath(List<Vector> positions, Vector dimensions, List<String> lines) {
+    private int getShortestPath(List<Vector> positions, Vector dimensions, List<String> lines) {
         List<Vector> blizzardDirections = new ArrayList<>();
         List<Vector> blizzardPositions = new ArrayList<>();
         extractBlizzards(lines, dimensions, blizzardPositions, blizzardDirections);
@@ -83,7 +77,7 @@ public class Day24 extends Day<Integer> {
         return time;
     }
 
-    private static Set<Vector> updatePlayerPositions(Vector end, Vector dimensions, Set<Vector> playerPositions, List<Vector> blizzardPositions) {
+    private Set<Vector> updatePlayerPositions(Vector end, Vector dimensions, Set<Vector> playerPositions, List<Vector> blizzardPositions) {
         Set<Vector> newPaths = new HashSet<>();
 
         for (Vector position : playerPositions) {
@@ -123,7 +117,7 @@ public class Day24 extends Day<Integer> {
         return updatedBlizzardPositions;
     }
 
-    private static void extractBlizzards(List<String> lines, Vector dimensions, List<Vector> blizzardPositions, List<Vector> blizzardDirections) {
+    private void extractBlizzards(List<String> lines, Vector dimensions, List<Vector> blizzardPositions, List<Vector> blizzardDirections) {
         for (int i = 1; i < dimensions.i() - 1; i++) {
             String line = lines.get(i);
             for (int j = 1; j < dimensions.j() - 1; j++) {
@@ -139,7 +133,7 @@ public class Day24 extends Day<Integer> {
         }
     }
 
-    public static boolean isValidPosition(Vector position, Vector dimensions) {
+    public boolean isValidPosition(Vector position, Vector dimensions) {
         return  position.i() >= 1 && position.i() <= dimensions.i() - 2 &&
                 position.j() >= 1 && position.j() <= dimensions.j() - 2;
     }

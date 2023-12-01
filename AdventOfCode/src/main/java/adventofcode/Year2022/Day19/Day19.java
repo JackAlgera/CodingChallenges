@@ -3,9 +3,7 @@ package adventofcode.Year2022.Day19;
 import adventofcode.utils.Day;
 
 import java.io.IOException;
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.List;
+import java.util.*;
 import java.util.stream.IntStream;
 
 public class Day19 extends Day<Integer> {
@@ -13,16 +11,11 @@ public class Day19 extends Day<Integer> {
     public static void main(String[] args) throws IOException {
         Day19 day = new Day19();
 
-        List<String> sampleInput = extractSampleInputLines(day.getName());
-        List<String> mainInput = extractMainInputLines(day.getName());
+        day.printPart1("sample-input", 33);
+        day.printPart1("input", 1675);
 
-        day.printAllResults(1, day.getName(),
-            day.part1(sampleInput), 33,
-            day.part1(mainInput), 1675);
-
-        day.printAllResults(2, day.getName(),
-            day.part2(sampleInput), 3472,
-            day.part2(mainInput), 6840);
+        day.printPart2("sample-input", 3472);
+        day.printPart2("input", 6840);
     }
 
     @Override
