@@ -2,6 +2,17 @@
 
 The [Advent Of Code](https://adventofcode.com/) webside is a coding Christmas Calendar (Advent calendar) where you get a coding challenge to complete each day.
 
+## December 2023
+
+| Mon          | Tue          | Wed          | Thu          | Fri          | Sat          | Sun          |
+|--------------|--------------|--------------|--------------|--------------|--------------|--------------|
+|              |              |              | 1<br/> 🌟🌟  | 2<br/>   | 3<br/>   | 4<br/>   |
+| 5 <br/>  | 6<br/>   | 7<br/>   | 8<br/>   | 9<br/>   | 10<br/>  | 11<br/>  |
+| 12<br/>  | 13<br/>  | 14<br/>  | 15<br/>  | 16<br/>  | 17<br/>  | 18<br/>  |
+| 19<br/>  | 20<br/>  | 21<br/>  | 22<br/>  | 23<br/>  | 24<br/>  | 25<br/>  |
+| 26           | 27           | 28           | 29           | 30           | 31           |              |
+
+
 ## December 2022
 
 | Mon          | Tue          | Wed          | Thu          | Fri          | Sat          | Sun          |
