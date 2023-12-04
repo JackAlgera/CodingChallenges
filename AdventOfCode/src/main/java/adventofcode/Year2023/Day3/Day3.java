@@ -1,14 +1,9 @@
 package adventofcode.Year2023.Day3;
 
-
 import adventofcode.utils.Day;
-import adventofcode.utils.Pair;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Day3 extends Day<Integer> {
 

@@ -1,10 +1,10 @@
 package adventofcode.Year2023.Day1;
 
-
 import adventofcode.utils.Day;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 public class Day1 extends Day<String> {
 

@@ -1,6 +1,5 @@
 package adventofcode.Year2023.Day2;
 
-
 import adventofcode.utils.Day;
 
 import java.io.IOException;
