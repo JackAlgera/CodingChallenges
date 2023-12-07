@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 
 public class Day6 extends Day<Long> {
 
@@ -13,7 +14,7 @@ public class Day6 extends Day<Long> {
         Day6 day = new Day6();
 
         day.printPart1("sample-input", 288L);
-        day.printPart1("input", 1L);
+        day.printPart1("input", 3317888L);
 
         day.printPart2("sample-input", 71503L);
         day.printPart2("input", 24655068L);
@@ -24,12 +25,9 @@ public class Day6 extends Day<Long> {
         List<Integer> times = parseInputPart1(lines, 0);
         List<Integer> distances = parseInputPart1(lines, 1);
 
-        long total = 1L;
-        for (int i = 0; i < times.size(); i++) {
-            total *= countWins(times.get(i), distances.get(i));
-        }
-
-        return total;
+        return IntStream.range(0, times.size())
+          .mapToLong(i -> countWins(times.get(i), distances.get(i)))
+          .reduce(1L, (a, b) -> a * b);
     }
 
     @Override
@@ -38,14 +36,10 @@ public class Day6 extends Day<Long> {
     }
 
     private static long countWins(long time, long distance) {
-        long count = 0;
-        for (int t = 0; t < time; t++) {
-            long totalDistance = t * (time - t);
-            if (totalDistance > distance) {
-                count++;
-            }
-        }
-        return count;
+        return LongStream.range(0, time)
+          .map(t -> t * (time - t))
+          .filter(d -> d > distance)
+          .count();
     }
 
     private static List<Integer> parseInputPart1(List<String> lines, int index) {
@@ -58,7 +52,6 @@ public class Day6 extends Day<Long> {
     private static long parseInputPart2(List<String> lines, int index) {
         return Long.parseLong(lines.get(index)
           .split(":")[1]
-          .trim()
           .replace(" ", ""));
     }
 }
