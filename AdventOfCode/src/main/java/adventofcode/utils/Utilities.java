@@ -60,4 +60,7 @@ public class Utilities {
     public static String redWord(String word) {
         return String.format("\u001B[31m%s\u001B[0m", word);
     }
+    public static String yellowWord(String word) {
+        return String.format("\u001B[33m%s\u001B[0m", word);
+    }
 }

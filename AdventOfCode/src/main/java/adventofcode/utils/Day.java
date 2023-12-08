@@ -42,7 +42,7 @@ public abstract class Day<T> {
           part,
           Objects.equals(result, expectedResult) ? Utilities.greenWord("" + result) : Utilities.redWord("" + result),
           expectedResult,
-          fileName
+          Utilities.yellowWord(fileName)
         ));
     }
 
