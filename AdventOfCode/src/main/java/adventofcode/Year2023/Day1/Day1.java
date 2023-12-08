@@ -8,16 +8,6 @@ import java.util.Map;
 
 public class Day1 extends Day<String> {
 
-    public static void main(String[] args) throws IOException {
-        Day1 day = new Day1();
-
-        day.printPart1("sample-input-part1", "142");
-        day.printPart1("input", "53080");
-
-        day.printPart2("sample-input-part2", "281");
-        day.printPart2("input", "53268");
-    }
-
     private final Map<String, Integer> numberMap = Map.of(
       "zero", 0,
       "one", 1,
@@ -30,6 +20,16 @@ public class Day1 extends Day<String> {
       "eight", 8,
       "nine", 9
     );
+
+    public static void main(String[] args) throws IOException {
+        Day1 day = new Day1();
+
+        day.printPart1("sample-input-part1", "142");
+        day.printPart1("input", "53080");
+
+        day.printPart2("sample-input-part2", "281");
+        day.printPart2("input", "53268");
+    }
 
     @Override
     public String part1(List<String> lines) throws IOException {
