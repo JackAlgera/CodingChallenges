@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,15 +28,22 @@ public abstract class Day<T> {
     }
 
     public void printPart1(String fileName, T expectedResult) throws IOException {
-        System.out.printf("\n-------- %s - Part 1 - %s --------%n", fileName, getDayName());
-        System.out.println("- Actual Result\t   : " + part1(extractInputLines(fileName)));
-        System.out.println("- Expected result\t : " + expectedResult);
+        printResponse(1, fileName, part1(extractInputLines(fileName)), expectedResult);
     }
 
     public void printPart2(String fileName, T expectedResult) throws IOException {
-        System.out.printf("\n-------- %s - Part 2 - %s --------%n", fileName, getDayName());
-        System.out.println("- Actual Result\t   : " + part2(extractInputLines(fileName)));
-        System.out.println("- Expected result\t : " + expectedResult);
+        printResponse(2, fileName, part2(extractInputLines(fileName)), expectedResult);
+        if (Objects.equals(fileName, "input")) System.out.println();
+    }
+
+    private void printResponse(int part, String fileName, T result, T expectedResult) {
+        System.out.printf(String.format("\n%s, Part %d: %s (%s)\t for %s",
+          getDayName(),
+          part,
+          Objects.equals(result, expectedResult) ? Utilities.greenWord("" + result) : Utilities.redWord("" + result),
+          expectedResult,
+          fileName
+        ));
     }
 
     public abstract T part1(List<String> lines) throws IOException;

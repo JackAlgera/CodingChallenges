@@ -53,4 +53,11 @@ public class Utilities {
         { -1, -1, -1, 0, 0, 1, 1, 1 },
         { -1, 0, 1, -1, 1, -1, 0, 1 }
     };
+
+    public static String greenWord(String word) {
+        return String.format("\u001B[32m%s\u001B[0m", word);
+    }
+    public static String redWord(String word) {
+        return String.format("\u001B[31m%s\u001B[0m", word);
+    }
 }
