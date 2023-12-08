@@ -23,7 +23,7 @@ public class Day8 extends Day<Long> {
         String instructions = lines.get(0);
         Map<String, Node> nodes = parseInput(lines.subList(2, lines.size()));
 
-        return getSteps("AAA", instructions, nodes, 0, false).initSteps();
+        return getSteps("AAA", instructions, nodes).steps();
     }
 
     @Override
@@ -35,7 +35,7 @@ public class Day8 extends Day<Long> {
           .map(Node::id)
           .filter(id -> id.charAt(2) == 'A')
           .map(id -> getCycle(id, instructions, nodes))
-          .mapToLong(Cycle::cycle)
+          .mapToLong(Cycle::steps)
           .reduce(this::lcm)
           .getAsLong();
     }
@@ -54,13 +54,16 @@ public class Day8 extends Day<Long> {
     }
 
     public Cycle getCycle(String id, String instructions, Map<String, Node> nodes) {
-        Cycle initSteps = getSteps(id, instructions, nodes, 0, false);
+        Cycle initSteps = getSteps(id, instructions, nodes);
 
         return new Cycle(
           id,
           initSteps.end,
-          initSteps.initSteps,
-          getSteps(initSteps.end, instructions, nodes, (int) initSteps.initSteps, true).initSteps);
+          getSteps(initSteps.end, instructions, nodes, (int) initSteps.steps(), true).steps());
+    }
+
+    public Cycle getSteps(String id, String instructions, Map<String, Node> nodes) {
+        return getSteps(id, instructions, nodes, 0, false);
     }
 
     public Cycle getSteps(String id, String instructions, Map<String, Node> nodes, int offset, boolean skipFirst) {
@@ -82,20 +85,22 @@ public class Day8 extends Day<Long> {
             }
         }
 
-        return new Cycle(id, current.id, steps, 0);
+        return new Cycle(id, current.id, steps);
     }
 
     public Map<String, Node> parseInput(List<String> lines) {
         Map<String, Node> nodes = new HashMap<>();
         for (String line : lines) {
             String id = line.split(" = ")[0];
-            String left = line.substring(7, 10);
-            String string = line.substring(12, 15);
-            nodes.put(id, new Node(id, left, string, id.charAt(2) == 'Z'));
+            nodes.put(id, new Node(id, line.substring(7, 10), line.substring(12, 15)));
         }
         return nodes;
     }
 
-    public record Node(String id, String left, String right, boolean isEndNode) {}
-    public record Cycle(String start, String end, long initSteps, long cycle) {}
+    public record Node(String id, String left, String right) {
+        public boolean isEndNode() {
+            return id.charAt(2) == 'Z';
+        }
+    }
+    public record Cycle(String start, String end, long steps) {}
 }
