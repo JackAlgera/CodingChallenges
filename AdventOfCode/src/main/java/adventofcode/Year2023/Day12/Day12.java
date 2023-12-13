@@ -16,7 +16,7 @@ public class Day12 extends Day<Long> {
         day.printPart1("sample-input", 21L);
         day.printPart1("input", 7716L);
 
-        day.printPart2("sample-input", 5_251_52L);
+        day.printPart2("sample-input", 525_152L);
         day.printPart2("input", 18_716_325_559_999L);
     }
 
