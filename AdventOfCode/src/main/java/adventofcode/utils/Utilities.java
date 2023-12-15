@@ -6,28 +6,6 @@ import java.io.FileReader;
 
 public class Utilities {
 
-//    public static String hexToBinary(char h) {
-//        return switch (h) {
-//            case '0' -> "0000";
-//            case '1' -> "0001";
-//            case '2' -> "0010";
-//            case '3' -> "0011";
-//            case '4' -> "0100";
-//            case '5' -> "0101";
-//            case '6' -> "0110";
-//            case '7' -> "0111";
-//            case '8' -> "1000";
-//            case '9' -> "1001";
-//            case 'A' -> "1010";
-//            case 'B' -> "1011";
-//            case 'C' -> "1100";
-//            case 'D' -> "1101";
-//            case 'E' -> "1110";
-//            case 'F' -> "1111";
-//            default -> throw new IllegalStateException("Incorrect hexadecimal value ?");
-//        };
-//    }
-
     public static BufferedReader getBufferedReader(String dayInput) throws FileNotFoundException {
         return new BufferedReader(new FileReader("AdventOfCode/src/main/java/adventofcode/" + dayInput));
     }
@@ -43,16 +21,34 @@ public class Utilities {
         { 0, 1, 0, -1 }
     };
 
+    public static boolean isValidIndex(int i, int j, int maxI, int maxJ) {
+        return i >= 0 && i < maxI && j >= 0 && j < maxJ;
+    }
+
+    public static <T> void printGrid(T[][] grid) {
+        System.out.println();
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                System.out.print(grid[i][j]);
+            }
+            System.out.println();
+        }
+    }
+
+    public static <T> void deepCopy(T[][] grid, T[][] temp) {
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                grid[i][j] = temp[i][j];
+            }
+        }
+    }
+
     /**
-     * Tile indices for the 8 neighbors following neighbors of a tile:
+     * Indexes for the 8 neighbors of a tile:
      * TOP_LEFT, TOP, TOP_RIGHT, LEFT, RIGHT, BOTTOM_LEFT, BOTTOM, BOTTOM_RIGHT
-     * NEIGHBORS_8[0] -> Rows (i)
-     * NEIGHBORS_8[1] -> Columns (j)
      */
-    public static int[][] NEIGHBORS_8 = new int[][]{
-        { -1, -1, -1, 0, 0, 1, 1, 1 },
-        { -1, 0, 1, -1, 1, -1, 0, 1 }
-    };
+    public static final int[] NEIGHBORS_8_I = new int[] { -1, -1, -1, 0, 0, 1, 1, 1 };
+    public static final int[] NEIGHBORS_8_J = new int[] { -1, 0, 1, -1, 1, -1, 0, 1 };
 
     public static String greenWord(String word) {
         return String.format("\u001B[32m%s\u001B[0m", word);
