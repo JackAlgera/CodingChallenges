@@ -11,10 +11,7 @@ public class Utilities {
     }
 
     /**
-     * Tile indices for the 4 neighbors following neighbors of a tile:
-     * TOP, RIGHT, BOTTOM, LEFT
-     * NEIGHBORS_4[0] -> Rows (i)
-     * NEIGHBORS_4[1] -> Columns (j)
+     * Indexes for the 4 neighbors of a tile: TOP, RIGHT, BOTTOM, LEFT
      */
     public static final int[] NEIGHBORS_4_I = new int[] { -1, 0, 1, 0 };
     public static final int[] NEIGHBORS_4_J = new int[] { 0, 1, 0, -1 };
