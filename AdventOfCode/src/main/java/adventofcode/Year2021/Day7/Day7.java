@@ -35,13 +35,13 @@ public class Day7 {
                     newFuelCost += (long) n * (n + 1) / 2;
                 }
                 if (newFuelCost > fuelCost) {
-                    System.out.printf("Pos %d will cost %d fuel\n", i, newFuelCost);
-                    System.out.printf("\nBest position is %d and will cost %d fuel\n", i-1, fuelCost);
+                    System.out.printf("Pos %d will distance %d fuel\n", i, newFuelCost);
+                    System.out.printf("\nBest position is %d and will distance %d fuel\n", i-1, fuelCost);
                     return;
                 }
 
                 fuelCost = newFuelCost;
-                System.out.printf("Pos %d will cost %d fuel\n", i, fuelCost);
+                System.out.printf("Pos %d will distance %d fuel\n", i, fuelCost);
             }
         }
     }

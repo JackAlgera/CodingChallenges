@@ -12,7 +12,7 @@ import java.util.Map;
 public class Day23 extends Day<Integer> {
 
     public static final List<Direction> DEFAULT_DIRECTIONS = List.of(
-        Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST
+        Direction.N, Direction.S, Direction.W, Direction.E
     );
 
     public static void main(String[] args) throws IOException {
@@ -135,10 +135,10 @@ public class Day23 extends Day<Integer> {
                     int newI = elf.getI();
                     int newJ = elf.getJ();
                     switch (direction) {
-                        case NORTH  -> newI -= 1;
-                        case SOUTH  -> newI += 1;
-                        case EAST   -> newJ += 1;
-                        case WEST   -> newJ -= 1;
+                        case N -> newI -= 1;
+                        case S -> newI += 1;
+                        case E -> newJ += 1;
+                        case W -> newJ -= 1;
                     }
                     moves.add(new Move(elf, newI, newJ));
                     if (!moveCount.containsKey(newI)) {
@@ -211,10 +211,10 @@ public class Day23 extends Day<Integer> {
 
         public boolean canMoveInDirection(Direction direction, boolean[][] grid) {
             return switch (direction) {
-                case NORTH  -> !grid[i - 1][j - 1] && !grid[i - 1][j] && !grid[i - 1][j + 1];
-                case SOUTH  -> !grid[i + 1][j - 1] && !grid[i + 1][j] && !grid[i + 1][j + 1];
-                case EAST   -> !grid[i - 1][j + 1] && !grid[i][j + 1] && !grid[i + 1][j + 1];
-                case WEST   -> !grid[i - 1][j - 1] && !grid[i][j - 1] && !grid[i + 1][j - 1];
+                case N -> !grid[i - 1][j - 1] && !grid[i - 1][j] && !grid[i - 1][j + 1];
+                case S -> !grid[i + 1][j - 1] && !grid[i + 1][j] && !grid[i + 1][j + 1];
+                case E -> !grid[i - 1][j + 1] && !grid[i][j + 1] && !grid[i + 1][j + 1];
+                case W -> !grid[i - 1][j - 1] && !grid[i][j - 1] && !grid[i + 1][j - 1];
             };
         }
 

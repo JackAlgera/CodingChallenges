@@ -6,7 +6,6 @@ import adventofcode.utils.enums.Direction;
 
 import java.io.IOException;
 import java.util.ArrayDeque;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
@@ -24,7 +23,7 @@ public class Day16 extends Day<Integer> {
 
     @Override
     public Integer part1(List<String> lines) throws IOException {
-        return bfs(parseInput(lines), 0, 0, Direction.EAST);
+        return bfs(parseInput(lines), 0, 0, Direction.E);
     }
 
     @Override
@@ -34,12 +33,12 @@ public class Day16 extends Day<Integer> {
         int width = lines.get(0).length();
         int maxEnergized = 0;
         for (int i = 0; i < height; i++) {
-            maxEnergized = Math.max(maxEnergized, bfs(grid, i, 0, Direction.EAST));
-            maxEnergized = Math.max(maxEnergized, bfs(grid, i, width - 1, Direction.WEST));
+            maxEnergized = Math.max(maxEnergized, bfs(grid, i, 0, Direction.E));
+            maxEnergized = Math.max(maxEnergized, bfs(grid, i, width - 1, Direction.W));
         }
         for (int j = 1; j < width - 1; j++) {
-            maxEnergized = Math.max(maxEnergized, bfs(grid, 0, j, Direction.SOUTH));
-            maxEnergized = Math.max(maxEnergized, bfs(grid, height - 1, j, Direction.NORTH));
+            maxEnergized = Math.max(maxEnergized, bfs(grid, 0, j, Direction.S));
+            maxEnergized = Math.max(maxEnergized, bfs(grid, height - 1, j, Direction.N));
         }
         return maxEnergized;
     }
@@ -70,36 +69,36 @@ public class Day16 extends Day<Integer> {
     public List<Beam> getNextBeams(Beam beam, char[][] grid) {
         char tile = grid[beam.i()][beam.j()];
         return switch (beam.direction()) {
-            case NORTH -> switch (tile) {
-                case '/' -> List.of(new Beam(beam.i(), beam.j(), Direction.EAST));
-                case '\\' -> List.of(new Beam(beam.i(), beam.j(), Direction.WEST));
+            case N -> switch (tile) {
+                case '/' -> List.of(new Beam(beam.i(), beam.j(), Direction.E));
+                case '\\' -> List.of(new Beam(beam.i(), beam.j(), Direction.W));
                 case '-' -> List.of(
-                    new Beam(beam.i(), beam.j(), Direction.WEST),
-                    new Beam(beam.i(), beam.j(), Direction.EAST));
+                    new Beam(beam.i(), beam.j(), Direction.W),
+                    new Beam(beam.i(), beam.j(), Direction.E));
                 default -> List.of(beam);
             };
-            case EAST -> switch (tile) {
-                case '/' -> List.of(new Beam(beam.i(), beam.j(), Direction.NORTH));
-                case '\\' -> List.of(new Beam(beam.i(), beam.j(), Direction.SOUTH));
+            case E -> switch (tile) {
+                case '/' -> List.of(new Beam(beam.i(), beam.j(), Direction.N));
+                case '\\' -> List.of(new Beam(beam.i(), beam.j(), Direction.S));
                 case '|' -> List.of(
-                    new Beam(beam.i(), beam.j(), Direction.NORTH),
-                    new Beam(beam.i(), beam.j(), Direction.SOUTH));
+                    new Beam(beam.i(), beam.j(), Direction.N),
+                    new Beam(beam.i(), beam.j(), Direction.S));
                 default -> List.of(beam);
             };
-            case SOUTH -> switch (tile) {
-                case '/' -> List.of(new Beam(beam.i(), beam.j(), Direction.WEST));
-                case '\\' -> List.of(new Beam(beam.i(), beam.j(), Direction.EAST));
+            case S -> switch (tile) {
+                case '/' -> List.of(new Beam(beam.i(), beam.j(), Direction.W));
+                case '\\' -> List.of(new Beam(beam.i(), beam.j(), Direction.E));
                 case '-' -> List.of(
-                    new Beam(beam.i(), beam.j(), Direction.WEST),
-                    new Beam(beam.i(), beam.j(), Direction.EAST));
+                    new Beam(beam.i(), beam.j(), Direction.W),
+                    new Beam(beam.i(), beam.j(), Direction.E));
                 default -> List.of(beam);
             };
-            case WEST -> switch (tile) {
-                case '/' -> List.of(new Beam(beam.i(), beam.j(), Direction.SOUTH));
-                case '\\' -> List.of(new Beam(beam.i(), beam.j(), Direction.NORTH));
+            case W -> switch (tile) {
+                case '/' -> List.of(new Beam(beam.i(), beam.j(), Direction.S));
+                case '\\' -> List.of(new Beam(beam.i(), beam.j(), Direction.N));
                 case '|' -> List.of(
-                    new Beam(beam.i(), beam.j(), Direction.NORTH),
-                    new Beam(beam.i(), beam.j(), Direction.SOUTH));
+                    new Beam(beam.i(), beam.j(), Direction.N),
+                    new Beam(beam.i(), beam.j(), Direction.S));
                 default -> List.of(beam);
             };
         };
@@ -137,10 +136,10 @@ public class Day16 extends Day<Integer> {
     public record Beam(int i, int j, Direction direction) {
         public Beam move() {
             return switch (direction) {
-                case NORTH -> new Beam(i - 1, j, direction);
-                case EAST -> new Beam(i, j + 1, direction);
-                case SOUTH -> new Beam(i + 1, j, direction);
-                case WEST -> new Beam(i, j - 1, direction);
+                case N -> new Beam(i - 1, j, direction);
+                case E -> new Beam(i, j + 1, direction);
+                case S -> new Beam(i + 1, j, direction);
+                case W -> new Beam(i, j - 1, direction);
             };
         }
     }

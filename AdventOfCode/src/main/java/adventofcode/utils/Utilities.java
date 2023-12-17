@@ -16,13 +16,15 @@ public class Utilities {
      * NEIGHBORS_4[0] -> Rows (i)
      * NEIGHBORS_4[1] -> Columns (j)
      */
-    public static int[][] NEIGHBORS_4 = new int[][]{
-        { -1, 0, 1, 0 },
-        { 0, 1, 0, -1 }
-    };
+    public static final int[] NEIGHBORS_4_I = new int[] { -1, 0, 1, 0 };
+    public static final int[] NEIGHBORS_4_J = new int[] { 0, 1, 0, -1 };
 
     public static boolean isValidIndex(int i, int j, int maxI, int maxJ) {
         return i >= 0 && i < maxI && j >= 0 && j < maxJ;
+    }
+
+    public static boolean isValidIndex(Pos pos, int maxI, int maxJ) {
+        return pos.i() >= 0 && pos.i() < maxI && pos.j() >= 0 && pos.j() < maxJ;
     }
 
     public static <T> void printGrid(T[][] grid) {

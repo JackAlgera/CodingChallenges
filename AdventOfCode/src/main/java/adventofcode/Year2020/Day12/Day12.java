@@ -21,7 +21,7 @@ public class Day12 extends Day<Integer> {
 
     @Override
     public Integer part1(List<String> lines) throws IOException {
-        Ship ship = new Ship(0, 0, Direction.EAST);
+        Ship ship = new Ship(0, 0, Direction.E);
         for (String instruction : lines) {
             ship = ship.handleInstruction(instruction);
         }
@@ -84,10 +84,10 @@ public class Day12 extends Day<Integer> {
 
         public Ship move(int value) {
             return switch (direction) {
-                case NORTH -> new Ship(i - value, j, direction);
-                case SOUTH -> new Ship(i + value, j, direction);
-                case EAST -> new Ship(i, j + value, direction);
-                case WEST -> new Ship(i, j - value, direction);
+                case N -> new Ship(i - value, j, direction);
+                case S -> new Ship(i + value, j, direction);
+                case E -> new Ship(i, j + value, direction);
+                case W -> new Ship(i, j - value, direction);
             };
         }
     }

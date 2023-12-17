@@ -47,7 +47,7 @@ public class Day22 extends Day<Integer> {
     public Integer part1(List<String> lines) throws IOException {
         TileType[][] grid = extractGrid(lines);
         List<String> actions = extractActions(lines);
-        Me me = new Me(0, findFirstOpenTile(lines.get(0)), Direction.EAST);
+        Me me = new Me(0, findFirstOpenTile(lines.get(0)), Direction.E);
 
         for (int k = 0; k < actions.size(); k++) {
             String action = actions.get(k);
@@ -73,7 +73,7 @@ public class Day22 extends Day<Integer> {
     public Integer part2(List<String> lines) throws IOException {
         TileType[][] grid = extractGrid(lines);
         List<String> actions = extractActions(lines);
-        Me me = new Me(0, findFirstOpenTile(lines.get(0)), Direction.EAST);
+        Me me = new Me(0, findFirstOpenTile(lines.get(0)), Direction.E);
 
         for (int k = 0; k < actions.size(); k++) {
             String action = actions.get(k);
@@ -112,50 +112,50 @@ public class Day22 extends Day<Integer> {
         switch (areaId) {
             case 0:
                 switch (me.direction()) {
-                    case NORTH -> newI = INPUT_AREAS.get(4).iMax() - 1;
-                    case SOUTH -> newI = INPUT_AREAS.get(2).iMin();
-                    case EAST -> newJ = INPUT_AREAS.get(1).jMin();
-                    case WEST -> newJ = INPUT_AREAS.get(1).jMax() - 1;
+                    case N -> newI = INPUT_AREAS.get(4).iMax() - 1;
+                    case S -> newI = INPUT_AREAS.get(2).iMin();
+                    case E -> newJ = INPUT_AREAS.get(1).jMin();
+                    case W -> newJ = INPUT_AREAS.get(1).jMax() - 1;
                 }
                 break;
             case 1:
                 switch (me.direction()) {
-                    case NORTH -> newI = INPUT_AREAS.get(1).iMax() - 1;
-                    case SOUTH -> newI = INPUT_AREAS.get(1).iMin();
-                    case EAST -> newJ = INPUT_AREAS.get(0).jMin();
-                    case WEST -> newJ = INPUT_AREAS.get(0).jMax() - 1;
+                    case N -> newI = INPUT_AREAS.get(1).iMax() - 1;
+                    case S -> newI = INPUT_AREAS.get(1).iMin();
+                    case E -> newJ = INPUT_AREAS.get(0).jMin();
+                    case W -> newJ = INPUT_AREAS.get(0).jMax() - 1;
                 }
                 break;
             case 2:
                 switch (me.direction()) {
-                    case NORTH -> newI = INPUT_AREAS.get(0).iMax() - 1;
-                    case SOUTH -> newI = INPUT_AREAS.get(4).iMin();
-                    case EAST -> newJ = INPUT_AREAS.get(2).jMin();
-                    case WEST -> newJ = INPUT_AREAS.get(2).jMax() - 1;
+                    case N -> newI = INPUT_AREAS.get(0).iMax() - 1;
+                    case S -> newI = INPUT_AREAS.get(4).iMin();
+                    case E -> newJ = INPUT_AREAS.get(2).jMin();
+                    case W -> newJ = INPUT_AREAS.get(2).jMax() - 1;
                 }
                 break;
             case 3:
                 switch (me.direction()) {
-                    case NORTH -> newI = INPUT_AREAS.get(5).iMax() - 1;
-                    case SOUTH -> newI = INPUT_AREAS.get(5).iMin();
-                    case EAST -> newJ = INPUT_AREAS.get(4).jMin();
-                    case WEST -> newJ = INPUT_AREAS.get(4).jMax() - 1;
+                    case N -> newI = INPUT_AREAS.get(5).iMax() - 1;
+                    case S -> newI = INPUT_AREAS.get(5).iMin();
+                    case E -> newJ = INPUT_AREAS.get(4).jMin();
+                    case W -> newJ = INPUT_AREAS.get(4).jMax() - 1;
                 }
                 break;
             case 4:
                 switch (me.direction()) {
-                    case NORTH -> newI = INPUT_AREAS.get(2).iMax() - 1;
-                    case SOUTH -> newI = INPUT_AREAS.get(0).iMin();
-                    case EAST -> newJ = INPUT_AREAS.get(3).jMin();
-                    case WEST -> newJ = INPUT_AREAS.get(3).jMax() - 1;
+                    case N -> newI = INPUT_AREAS.get(2).iMax() - 1;
+                    case S -> newI = INPUT_AREAS.get(0).iMin();
+                    case E -> newJ = INPUT_AREAS.get(3).jMin();
+                    case W -> newJ = INPUT_AREAS.get(3).jMax() - 1;
                 }
                 break;
             case 5:
                 switch (me.direction()) {
-                    case NORTH -> newI = INPUT_AREAS.get(3).iMax() - 1;
-                    case SOUTH -> newI = INPUT_AREAS.get(3).iMin();
-                    case EAST -> newJ = INPUT_AREAS.get(5).jMin();
-                    case WEST -> newJ = INPUT_AREAS.get(5).jMax() - 1;
+                    case N -> newI = INPUT_AREAS.get(3).iMax() - 1;
+                    case S -> newI = INPUT_AREAS.get(3).iMin();
+                    case E -> newJ = INPUT_AREAS.get(5).jMin();
+                    case W -> newJ = INPUT_AREAS.get(5).jMax() - 1;
                 }
                 break;
         }
@@ -188,50 +188,50 @@ public class Day22 extends Day<Integer> {
         switch (areaId) {
             case 0:
                 switch (me.direction()) {
-                    case NORTH -> newI = SAMPLE_AREAS.get(4).iMax() - 1;
-                    case SOUTH -> newI = SAMPLE_AREAS.get(3).iMin();
-                    case EAST -> newJ = SAMPLE_AREAS.get(0).jMin();
-                    case WEST -> newJ = SAMPLE_AREAS.get(0).jMax() - 1;
+                    case N -> newI = SAMPLE_AREAS.get(4).iMax() - 1;
+                    case S -> newI = SAMPLE_AREAS.get(3).iMin();
+                    case E -> newJ = SAMPLE_AREAS.get(0).jMin();
+                    case W -> newJ = SAMPLE_AREAS.get(0).jMax() - 1;
                 }
                 break;
             case 1:
                 switch (me.direction()) {
-                    case NORTH -> newI = SAMPLE_AREAS.get(1).iMax() - 1;
-                    case SOUTH -> newI = SAMPLE_AREAS.get(1).iMin();
-                    case EAST -> newJ = SAMPLE_AREAS.get(2).jMin();
-                    case WEST -> newJ = SAMPLE_AREAS.get(3).jMax() - 1;
+                    case N -> newI = SAMPLE_AREAS.get(1).iMax() - 1;
+                    case S -> newI = SAMPLE_AREAS.get(1).iMin();
+                    case E -> newJ = SAMPLE_AREAS.get(2).jMin();
+                    case W -> newJ = SAMPLE_AREAS.get(3).jMax() - 1;
                 }
                 break;
             case 2:
                 switch (me.direction()) {
-                    case NORTH -> newI = SAMPLE_AREAS.get(2).iMax() - 1;
-                    case SOUTH -> newI = SAMPLE_AREAS.get(2).iMin();
-                    case EAST -> newJ = SAMPLE_AREAS.get(3).jMin();
-                    case WEST -> newJ = SAMPLE_AREAS.get(1).jMax() - 1;
+                    case N -> newI = SAMPLE_AREAS.get(2).iMax() - 1;
+                    case S -> newI = SAMPLE_AREAS.get(2).iMin();
+                    case E -> newJ = SAMPLE_AREAS.get(3).jMin();
+                    case W -> newJ = SAMPLE_AREAS.get(1).jMax() - 1;
                 }
                 break;
             case 3:
                 switch (me.direction()) {
-                    case NORTH -> newI = SAMPLE_AREAS.get(0).iMax() - 1;
-                    case SOUTH -> newI = SAMPLE_AREAS.get(4).iMin();
-                    case EAST -> newJ = SAMPLE_AREAS.get(1).jMin();
-                    case WEST -> newJ = SAMPLE_AREAS.get(2).jMax() - 1;
+                    case N -> newI = SAMPLE_AREAS.get(0).iMax() - 1;
+                    case S -> newI = SAMPLE_AREAS.get(4).iMin();
+                    case E -> newJ = SAMPLE_AREAS.get(1).jMin();
+                    case W -> newJ = SAMPLE_AREAS.get(2).jMax() - 1;
                 }
                 break;
             case 4:
                 switch (me.direction()) {
-                    case NORTH -> newI = SAMPLE_AREAS.get(3).iMax() - 1;
-                    case SOUTH -> newI = SAMPLE_AREAS.get(0).iMin();
-                    case EAST -> newJ = SAMPLE_AREAS.get(5).jMin();
-                    case WEST -> newJ = SAMPLE_AREAS.get(5).jMax() - 1;
+                    case N -> newI = SAMPLE_AREAS.get(3).iMax() - 1;
+                    case S -> newI = SAMPLE_AREAS.get(0).iMin();
+                    case E -> newJ = SAMPLE_AREAS.get(5).jMin();
+                    case W -> newJ = SAMPLE_AREAS.get(5).jMax() - 1;
                 }
                 break;
             case 5:
                 switch (me.direction()) {
-                    case NORTH -> newI = SAMPLE_AREAS.get(5).iMax() - 1;
-                    case SOUTH -> newI = SAMPLE_AREAS.get(5).iMin();
-                    case EAST -> newJ = SAMPLE_AREAS.get(4).jMin();
-                    case WEST -> newJ = SAMPLE_AREAS.get(4).jMax() - 1;
+                    case N -> newI = SAMPLE_AREAS.get(5).iMax() - 1;
+                    case S -> newI = SAMPLE_AREAS.get(5).iMin();
+                    case E -> newJ = SAMPLE_AREAS.get(4).jMin();
+                    case W -> newJ = SAMPLE_AREAS.get(4).jMax() - 1;
                 }
                 break;
         }
@@ -268,105 +268,105 @@ public class Day22 extends Day<Integer> {
         switch (areaId) {
             case 0:
                 switch (me.direction()) {
-                    case NORTH -> {
+                    case N -> {
                         newI = INPUT_AREAS.get(5).iMin() + deltaJ;
                         newJ = INPUT_AREAS.get(5).jMin();
-                        newDirection = Direction.EAST;
+                        newDirection = Direction.E;
                     }
-                    case SOUTH -> newI = INPUT_AREAS.get(2).iMin();
-                    case EAST -> newJ = INPUT_AREAS.get(1).jMin();
-                    case WEST -> {
+                    case S -> newI = INPUT_AREAS.get(2).iMin();
+                    case E -> newJ = INPUT_AREAS.get(1).jMin();
+                    case W -> {
                         newI = INPUT_AREAS.get(3).iMax() - 1 - deltaI;
                         newJ = INPUT_AREAS.get(3).jMin();
-                        newDirection = Direction.EAST;
+                        newDirection = Direction.E;
                     }
                 }
                 break;
             case 1:
                 switch (me.direction()) {
-                    case NORTH -> {
+                    case N -> {
                         newI = INPUT_AREAS.get(5).iMax() - 1;
                         newJ = INPUT_AREAS.get(5).jMin() + deltaJ;
-                        newDirection = Direction.NORTH;
+                        newDirection = Direction.N;
                     }
-                    case SOUTH -> {
+                    case S -> {
                         newI = INPUT_AREAS.get(2).iMin() + deltaJ;
                         newJ = INPUT_AREAS.get(2).jMax() - 1;
-                        newDirection = Direction.WEST;
+                        newDirection = Direction.W;
                     }
-                    case EAST -> {
+                    case E -> {
                         newI = INPUT_AREAS.get(4).iMax() - 1 - deltaI;
                         newJ = INPUT_AREAS.get(4).jMax() - 1;
-                        newDirection = Direction.WEST;
+                        newDirection = Direction.W;
                     }
-                    case WEST -> newJ = INPUT_AREAS.get(0).jMax() - 1;
+                    case W -> newJ = INPUT_AREAS.get(0).jMax() - 1;
                 }
                 break;
             case 2:
                 switch (me.direction()) {
-                    case NORTH -> newI = INPUT_AREAS.get(0).iMax() - 1;
-                    case SOUTH -> newI = INPUT_AREAS.get(4).iMin();
-                    case EAST -> {
+                    case N -> newI = INPUT_AREAS.get(0).iMax() - 1;
+                    case S -> newI = INPUT_AREAS.get(4).iMin();
+                    case E -> {
                         newI = INPUT_AREAS.get(1).iMax() - 1;
                         newJ = INPUT_AREAS.get(1).jMin() + deltaI;
-                        newDirection = Direction.NORTH;
+                        newDirection = Direction.N;
                     }
-                    case WEST -> {
+                    case W -> {
                         newI = INPUT_AREAS.get(3).iMin();
                         newJ = INPUT_AREAS.get(3).jMin() + deltaI;
-                        newDirection = Direction.SOUTH;
+                        newDirection = Direction.S;
                     }
                 }
                 break;
             case 3:
                 switch (me.direction()) {
-                    case NORTH -> {
+                    case N -> {
                         newI = INPUT_AREAS.get(2).iMin() + deltaJ;
                         newJ = INPUT_AREAS.get(2).jMin();
-                        newDirection = Direction.EAST;
+                        newDirection = Direction.E;
                     }
-                    case SOUTH -> newI = INPUT_AREAS.get(5).iMin();
-                    case EAST -> newJ = INPUT_AREAS.get(4).jMin();
-                    case WEST -> {
+                    case S -> newI = INPUT_AREAS.get(5).iMin();
+                    case E -> newJ = INPUT_AREAS.get(4).jMin();
+                    case W -> {
                         newI = INPUT_AREAS.get(0).iMax() - 1 - deltaI;
                         newJ = INPUT_AREAS.get(0).jMin();
-                        newDirection = Direction.EAST;
+                        newDirection = Direction.E;
                     }
                 }
                 break;
             case 4:
                 switch (me.direction()) {
-                    case NORTH -> newI = INPUT_AREAS.get(2).iMax() - 1;
-                    case SOUTH -> {
+                    case N -> newI = INPUT_AREAS.get(2).iMax() - 1;
+                    case S -> {
                         newI = INPUT_AREAS.get(5).iMin() + deltaJ;
                         newJ = INPUT_AREAS.get(5).jMax() - 1;
-                        newDirection = Direction.WEST;
+                        newDirection = Direction.W;
                     }
-                    case EAST -> {
+                    case E -> {
                         newI = INPUT_AREAS.get(1).iMax() - 1 - deltaI;
                         newJ = INPUT_AREAS.get(1).jMax() - 1;
-                        newDirection = Direction.WEST;
+                        newDirection = Direction.W;
                     }
-                    case WEST -> newJ = INPUT_AREAS.get(3).jMax() - 1;
+                    case W -> newJ = INPUT_AREAS.get(3).jMax() - 1;
                 }
                 break;
             case 5:
                 switch (me.direction()) {
-                    case NORTH -> newI = INPUT_AREAS.get(3).iMax() - 1;
-                    case SOUTH -> {
+                    case N -> newI = INPUT_AREAS.get(3).iMax() - 1;
+                    case S -> {
                         newI = INPUT_AREAS.get(1).iMin();
                         newJ = INPUT_AREAS.get(1).jMin() + deltaJ;
-                        newDirection = Direction.SOUTH;
+                        newDirection = Direction.S;
                     }
-                    case EAST -> {
+                    case E -> {
                         newI = INPUT_AREAS.get(4).iMax() - 1;
                         newJ = INPUT_AREAS.get(4).jMin() + deltaI;
-                        newDirection = Direction.NORTH;
+                        newDirection = Direction.N;
                     }
-                    case WEST -> {
+                    case W -> {
                         newI = INPUT_AREAS.get(0).iMin();
                         newJ = INPUT_AREAS.get(0).jMin() + deltaI;
-                        newDirection = Direction.SOUTH;
+                        newDirection = Direction.S;
                     }
                 }
                 break;
@@ -408,106 +408,106 @@ public class Day22 extends Day<Integer> {
         switch (areaId) {
             case 0:
                 switch (me.direction()) {
-                    case NORTH -> {
+                    case N -> {
                         newI = SAMPLE_AREAS.get(1).iMin();
                         newJ = SAMPLE_AREAS.get(1).iMax() - 1 - deltaJ;
-                        newDirection = Direction.SOUTH;
+                        newDirection = Direction.S;
                     }
-                    case SOUTH -> newI = SAMPLE_AREAS.get(3).iMin();
-                    case EAST -> {
+                    case S -> newI = SAMPLE_AREAS.get(3).iMin();
+                    case E -> {
                         newI = SAMPLE_AREAS.get(5).iMax() - 1 - deltaI;
                         newJ = SAMPLE_AREAS.get(5).jMax() - 1;
-                        newDirection = Direction.WEST;
+                        newDirection = Direction.W;
                     }
-                    case WEST -> {
+                    case W -> {
                         newI = SAMPLE_AREAS.get(2).iMin();
                         newJ = SAMPLE_AREAS.get(2).jMin() + deltaI;
-                        newDirection = Direction.SOUTH;
+                        newDirection = Direction.S;
                     }
                 }
                 break;
             case 1:
                 switch (me.direction()) {
-                    case NORTH -> {
+                    case N -> {
                         newI = SAMPLE_AREAS.get(0).iMin();
                         newJ = SAMPLE_AREAS.get(0).iMax() - 1 - deltaJ;
-                        newDirection = Direction.SOUTH;
+                        newDirection = Direction.S;
                     }
-                    case SOUTH -> {
+                    case S -> {
                         newI = SAMPLE_AREAS.get(4).iMax() - 1;
                         newJ = SAMPLE_AREAS.get(4).iMax() - 1 - deltaJ;
-                        newDirection = Direction.NORTH;
+                        newDirection = Direction.N;
                     }
-                    case EAST -> newJ = SAMPLE_AREAS.get(2).iMin();
-                    case WEST -> {
+                    case E -> newJ = SAMPLE_AREAS.get(2).iMin();
+                    case W -> {
                         newI = SAMPLE_AREAS.get(5).iMax() - 1;
                         newJ = SAMPLE_AREAS.get(5).jMax() - 1 - deltaI;
-                        newDirection = Direction.NORTH;
+                        newDirection = Direction.N;
                     }
                 }
                 break;
             case 2:
                 switch (me.direction()) {
-                    case NORTH -> {
+                    case N -> {
                         newI = SAMPLE_AREAS.get(0).iMin() + deltaJ;
                         newJ = SAMPLE_AREAS.get(0).jMin();
-                        newDirection = Direction.EAST;
+                        newDirection = Direction.E;
                     }
-                    case SOUTH -> {
+                    case S -> {
                         newI = SAMPLE_AREAS.get(4).iMin() + deltaJ;
                         newJ = SAMPLE_AREAS.get(4).jMin();
-                        newDirection = Direction.EAST;
+                        newDirection = Direction.E;
                     }
-                    case EAST -> newJ = SAMPLE_AREAS.get(3).jMin();
-                    case WEST -> newJ = SAMPLE_AREAS.get(1).jMax() - 1;
+                    case E -> newJ = SAMPLE_AREAS.get(3).jMin();
+                    case W -> newJ = SAMPLE_AREAS.get(1).jMax() - 1;
                 }
                 break;
             case 3:
                 switch (me.direction()) {
-                    case NORTH -> newI = SAMPLE_AREAS.get(0).iMax() - 1;
-                    case SOUTH -> newI = SAMPLE_AREAS.get(4).iMin();
-                    case EAST -> {
+                    case N -> newI = SAMPLE_AREAS.get(0).iMax() - 1;
+                    case S -> newI = SAMPLE_AREAS.get(4).iMin();
+                    case E -> {
                         newI = SAMPLE_AREAS.get(5).iMin();
                         newJ = SAMPLE_AREAS.get(5).jMax() - 1 - deltaI;
-                        newDirection = Direction.SOUTH;
+                        newDirection = Direction.S;
                     }
-                    case WEST -> newJ = SAMPLE_AREAS.get(2).jMax() - 1;
+                    case W -> newJ = SAMPLE_AREAS.get(2).jMax() - 1;
                 }
                 break;
             case 4:
                 switch (me.direction()) {
-                    case NORTH -> newI = SAMPLE_AREAS.get(3).iMax() - 1;
-                    case SOUTH -> {
+                    case N -> newI = SAMPLE_AREAS.get(3).iMax() - 1;
+                    case S -> {
                         newI = SAMPLE_AREAS.get(1).iMax() - 1;
                         newJ = SAMPLE_AREAS.get(1).jMax() - 1 - deltaJ;
-                        newDirection = Direction.NORTH;
+                        newDirection = Direction.N;
                     }
-                    case EAST -> newJ = SAMPLE_AREAS.get(5).jMin();
-                    case WEST -> {
+                    case E -> newJ = SAMPLE_AREAS.get(5).jMin();
+                    case W -> {
                         newI = SAMPLE_AREAS.get(2).iMax() - 1;
                         newJ = SAMPLE_AREAS.get(2).jMin() + deltaI;
-                        newDirection = Direction.NORTH;
+                        newDirection = Direction.N;
                     }
                 }
                 break;
             case 5:
                 switch (me.direction()) {
-                    case NORTH -> {
+                    case N -> {
                         newI = SAMPLE_AREAS.get(3).iMax() - 1 - deltaJ;
                         newJ = SAMPLE_AREAS.get(3).jMax() - 1;
-                        newDirection = Direction.WEST;
+                        newDirection = Direction.W;
                     }
-                    case SOUTH -> {
+                    case S -> {
                         newI = SAMPLE_AREAS.get(1).iMax() - 1 - deltaJ;
                         newJ = SAMPLE_AREAS.get(1).jMin();
-                        newDirection = Direction.EAST;
+                        newDirection = Direction.E;
                     }
-                    case EAST -> {
+                    case E -> {
                         newI = SAMPLE_AREAS.get(0).iMax() - 1 - deltaI;
                         newJ = SAMPLE_AREAS.get(0).iMax() - 1;
-                        newDirection = Direction.WEST;
+                        newDirection = Direction.W;
                     }
-                    case WEST -> newJ = SAMPLE_AREAS.get(4).jMax() - 1;
+                    case W -> newJ = SAMPLE_AREAS.get(4).jMax() - 1;
                 }
                 break;
         }
@@ -574,10 +574,10 @@ public class Day22 extends Day<Integer> {
             int newI = i;
             int newJ = j;
             switch (direction) {
-                case NORTH -> newI--;
-                case SOUTH -> newI++;
-                case WEST -> newJ--;
-                case EAST -> newJ++;
+                case N -> newI--;
+                case S -> newI++;
+                case W -> newJ--;
+                case E -> newJ++;
             }
             return new Me(
                 newI,
@@ -588,10 +588,10 @@ public class Day22 extends Day<Integer> {
 
         public int getPassword() {
             int password = switch (direction) {
-                case NORTH -> 3;
-                case EAST -> 0;
-                case SOUTH -> 1;
-                case WEST -> 2;
+                case N -> 3;
+                case E -> 0;
+                case S -> 1;
+                case W -> 2;
             };
 
             return password + 1000 * (i + 1) + 4 * (j + 1);
