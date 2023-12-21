@@ -1,5 +1,7 @@
 package adventofcode.utils;
 
+import adventofcode.utils.enums.Direction;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -11,10 +13,11 @@ public class Utilities {
     }
 
     /**
-     * Indexes for the 4 neighbors of a tile: TOP, RIGHT, BOTTOM, LEFT
+     * Indexes for the 4 neighbors of a tile: NORTH, EAST, SOUTH, WEST
      */
     public static final int[] NEIGHBORS_4_I = new int[] { -1, 0, 1, 0 };
     public static final int[] NEIGHBORS_4_J = new int[] { 0, 1, 0, -1 };
+    public static final Direction[] NEIGHBORS_4_DIRECTIONS = new Direction[] { Direction.N, Direction.E, Direction.S, Direction.W };
 
     public static boolean isValidIndex(int i, int j, int maxI, int maxJ) {
         return i >= 0 && i < maxI && j >= 0 && j < maxJ;
