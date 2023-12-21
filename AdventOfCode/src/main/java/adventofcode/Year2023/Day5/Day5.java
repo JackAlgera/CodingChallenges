@@ -13,7 +13,7 @@ public class Day5 extends Day<Long> {
         Day5 day = new Day5();
 
         day.printPart1("sample-input", 35L);
-        day.printPart1("input", 1L);
+        day.printPart1("input", 806029445L);
 
         day.printPart2("sample-input", 46L);
         day.printPart2("input", 59370572L);
