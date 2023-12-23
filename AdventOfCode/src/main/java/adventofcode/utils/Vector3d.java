@@ -1,3 +1,3 @@
-package adventofcode.utils.enums;
+package adventofcode.utils;
 
 public record Vector3d(int x, int y, int z) {}

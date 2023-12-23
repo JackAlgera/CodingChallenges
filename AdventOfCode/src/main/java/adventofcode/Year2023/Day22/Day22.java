@@ -2,7 +2,7 @@ package adventofcode.Year2023.Day22;
 
 import adventofcode.utils.Day;
 import adventofcode.utils.Vector2d;
-import adventofcode.utils.enums.Vector3d;
+import adventofcode.utils.Vector3d;
 
 import java.io.IOException;
 import java.util.*;
