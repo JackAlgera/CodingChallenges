@@ -19,6 +19,25 @@ public class Utilities {
     public static final int[] NEIGHBORS_4_J = new int[] { 0, 1, 0, -1 };
     public static final Direction[] NEIGHBORS_4_DIRECTIONS = new Direction[] { Direction.N, Direction.E, Direction.S, Direction.W };
 
+    /**
+     * Indexes for the 26 neighbors of a tile in 3D
+     */
+    public static final int[] NEIGHBORS_26_X = new int[] {
+        -1, 0, 1, -1, 0, 1, -1, 0, 1,
+        -1, 0, 1, -1, 1, -1, 0, 1,
+        -1, 0, 1, -1, 0, 1, -1, 0, 1
+    };
+    public static final int[] NEIGHBORS_26_Y = new int[] {
+        -1, -1, -1, 0, 0, 0, 1, 1, 1,
+        -1, -1, -1, 0, 0, 1, 1, 1,
+        -1, -1, -1, 0, 0, 0, 1, 1, 1
+    };
+    public static final int[] NEIGHBORS_26_Z = new int[] {
+        -1, -1, -1, -1, -1, -1, -1, -1, -1,
+        0, 0, 0, 0, 0, 0, 0, 0,
+        1, 1, 1, 1, 1, 1, 1, 1, 1
+    };
+
     public static boolean isValidIndex(int i, int j, int maxI, int maxJ) {
         return i >= 0 && i < maxI && j >= 0 && j < maxJ;
     }
