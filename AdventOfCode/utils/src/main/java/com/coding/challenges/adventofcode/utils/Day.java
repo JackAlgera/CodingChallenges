@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 public abstract class Day<T> {
 
-    private final Pattern YEAR_PATTERN = Pattern.compile("Year(\\d+)");
+    private final Pattern YEAR_PATTERN = Pattern.compile("year(\\d+)");
 
     public String getDayName() {
         return getClass().getSimpleName();
@@ -26,7 +26,7 @@ public abstract class Day<T> {
 
     private int extractYear() {
         Matcher m = YEAR_PATTERN.matcher(getClass().getPackageName());
-        return m.find() ? Integer.parseInt(m.group()) : 2024;
+        return m.find() ? Integer.parseInt(m.group(1)) : 2024;
     }
 
     public void printPart1(String fileName, T expectedResult) throws IOException {
