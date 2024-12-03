@@ -1,0 +1,13 @@
+pluginManagement {
+    repositories {
+        // Use the Gradle Plugin Portal for resolving plugins.
+        gradlePluginPortal()
+    }
+}
+
+rootProject.name = 'coding-challenges'
+
+include 'AdventOfCode:years:2024'
+include 'AdventOfCode:years:2023'
+include 'AdventOfCode:years:2022'
+include 'AdventOfCode:utils'

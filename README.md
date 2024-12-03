@@ -1,3 +1,8 @@
+# Intro
+
+The repository is structured using a multi Gradle project (WIP), where each project is a different coding challenge platform.
+Each one has a separate Gradle build file, that has multiple subprojects (e.g. `AdventOfCode` has one for each year of the challenge).
+
 # Coding Challenges
 
 Coding challenges I compete in:
