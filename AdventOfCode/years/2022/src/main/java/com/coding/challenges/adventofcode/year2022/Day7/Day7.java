@@ -1,29 +1,32 @@
 package com.coding.challenges.adventofcode.year2022.Day7;
 
+import com.coding.challenges.adventofcode.utils.Day;
 import com.coding.challenges.adventofcode.utils.Utilities;
+import lombok.Getter;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.*;
 
-public class Day7 {
-
-    private static final String INPUT_NAME = "Year2022/Day7/input.txt";
+public class Day7 extends Day<Integer> {
 
     public static void main(String[] args) throws IOException {
         Day7 day = new Day7();
-        day.part2();
+
+        day.printPart2("input", 3842121);
     }
 
-    private void part2() throws IOException {
-        BufferedReader br = Utilities.getBufferedReader(INPUT_NAME);
-        br.readLine();
+    @Override
+    public Integer part1(List<String> lines) {
+        return 0;
+    }
 
+    @Override
+    public Integer part2(List<String> lines) {
         Node root = new Node("/", 0, null);
         Node currentNode = root;
 
-        while (br.ready()) {
-            String line = br.readLine();
+        for (String line : lines) {
             String[] sections = line.split(" ");
 
             if (sections[0].equals("$")) {
@@ -68,16 +71,16 @@ public class Day7 {
             }
         }
 
-        System.out.println(smallestDirectory);
-        System.out.println("-------- Day 7 - part 2 --------");
-        System.out.println("Smallest directory size: " + smallestDirectory);
-        System.out.println("Expected smallest directory size: 3842121");
+        return smallestDirectory;
     }
 
-    private class Node {
+    private static class Node {
+        @Getter
         private final String name;
         private final int size;
-        private Node parent;
+        @Getter
+        private final Node parent;
+        @Getter
         private final Map<String, Node> children;
 
         public Node(String name, int size, Node parent) {
@@ -87,11 +90,7 @@ public class Day7 {
             this.children = new HashMap<>();
         }
 
-        public String getName() {
-            return name;
-        }
-
-        public boolean isDir() {
+      public boolean isDir() {
             return this.size <= 0;
         }
 
@@ -107,15 +106,7 @@ public class Day7 {
             return totalSize;
         }
 
-        public Map<String, Node> getChildren() {
-            return children;
-        }
-
-        public Node getParent() {
-            return parent;
-        }
-
-        public void addChild(Node child) {
+      public void addChild(Node child) {
             this.children.put(child.getName(), child);
         }
     }

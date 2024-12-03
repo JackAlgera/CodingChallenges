@@ -1,34 +1,41 @@
 package com.coding.challenges.adventofcode.year2022.Day6;
 
+import com.coding.challenges.adventofcode.utils.Day;
 import com.coding.challenges.adventofcode.utils.Utilities;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.List;
 
-public class Day6 {
-
-    private static final String INPUT_NAME = "Year2022/Day6/input.txt";
+public class Day6 extends Day<Integer> {
 
     public static void main(String[] args) throws IOException {
         Day6 day = new Day6();
-        day.part(4, 1287);
-        day.part(14, 3716);
+
+        day.printPart1("input", 1287);
+        day.printPart2("input", 3716);
     }
 
-    private void part(int packetSize, int expectedValue) throws IOException {
-        BufferedReader br = Utilities.getBufferedReader(INPUT_NAME);
-        String line = br.readLine();
+    @Override
+    public Integer part1(List<String> lines) {
+        return part(lines, 4);
+    }
 
+    @Override
+    public Integer part2(List<String> lines) {
+        return part(lines, 14);
+    }
+
+    private int part(List<String> lines, int packetSize) {
+        String line = lines.get(0);
         for (int i = packetSize - 1; i < line.length(); i++) {
             String subLine = line.substring(i - packetSize + 1, i + 1);
 
             if (checkChars(subLine)) {
-                System.out.println("-------- Day 6 --------");
-                System.out.println("Chars processed : " + (i + 1));
-                System.out.println("Expected chars processed: " + expectedValue);
-                return;
+                return i + 1;
             }
         }
+        return -1;
     }
 
     private boolean checkChars(String sequence) {
