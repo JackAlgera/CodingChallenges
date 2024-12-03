@@ -1,4 +1,4 @@
-package adventofcode.Year2023.Day24;
+package src.main.java.adventofcode.Year2023.Day24;
 
 import adventofcode.utils.Day;
 import adventofcode.utils.Vector2dFloat;
