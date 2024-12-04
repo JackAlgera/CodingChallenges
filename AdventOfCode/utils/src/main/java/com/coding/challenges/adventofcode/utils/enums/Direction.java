@@ -1,7 +1,8 @@
 package com.coding.challenges.adventofcode.utils.enums;
 
 public enum Direction {
-    N, E, S, W;
+    N, E, S, W,
+    NE, SE, SW, NW;
 
     public Direction rotateLeft(int turns) {
         int totalDirections = Direction.values().length;
