@@ -1,8 +1,7 @@
 package com.coding.challenges.adventofcode.utils.enums;
 
 public enum Direction {
-    N, E, S, W,
-    NE, SE, SW, NW;
+    N, E, S, W;
 
     public Direction rotateLeft(int turns) {
         int totalDirections = Direction.values().length;
@@ -16,6 +15,10 @@ public enum Direction {
 
     public boolean isOpposite(Direction direction) {
         return this.rotateLeft(2) == direction;
+    }
+
+    public Direction opposite() {
+        return this.rotateLeft(2);
     }
 
     public static Direction fromOrientation(String s) {

@@ -9,10 +9,6 @@ public record Pos(int i, int j) {
             case E -> new Pos(i, j + 1);
             case S -> new Pos(i + 1, j);
             case W -> new Pos(i, j - 1);
-            case NW -> new Pos(i - 1, j - 1);
-            case NE -> new Pos(i - 1, j + 1);
-            case SW -> new Pos(i + 1, j - 1);
-            case SE -> new Pos(i + 1, j + 1);
         };
     }
 

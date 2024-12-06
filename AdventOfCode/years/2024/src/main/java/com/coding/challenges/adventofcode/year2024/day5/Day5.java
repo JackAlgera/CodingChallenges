@@ -1,4 +1,4 @@
-package com.coding.challenges.adventofcode.year2024.day5;
+package com.coding.challenges.adventofcode.year2024.Day5;
 
 import java.io.IOException;
 import java.util.ArrayList;
