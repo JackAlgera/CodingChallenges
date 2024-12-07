@@ -1,9 +1,8 @@
-package adventofcode.Year{{ year }}.Day{{ day }};
-
-import adventofcode.utils.Day;
+package com.coding.challenges.adventofcode.year{{ year }}.Day{{ day }};
 
 import java.io.IOException;
 import java.util.List;
+import com.coding.challenges.adventofcode.utils.Day;
 
 public class Day{{ day }} extends Day<{{ type }}> {
 
@@ -18,12 +17,12 @@ public class Day{{ day }} extends Day<{{ type }}> {
     }
 
     @Override
-    public {{ type }} part1(List<String> lines) throws IOException {
+    public {{ type }} part1(List<String> lines) {
         return {{ default_value }};
     }
 
     @Override
-    public {{ type }} part2(List<String> lines) throws IOException {
+    public {{ type }} part2(List<String> lines) {
         return {{ default_value }};
     }
 }

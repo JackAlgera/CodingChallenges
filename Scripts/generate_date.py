@@ -13,7 +13,7 @@ environment = Environment(loader=FileSystemLoader("templates/"))
 def cli(year, day, response_class):
     print(f'Generating data for {year} and {day}')
 
-    basePath = f'../AdventOfCode/src/main/java/adventofcode/Year{year}/Day{day}'
+    basePath = f'../AdventOfCode/years/{year}/src/main/java/com/coding/challenges/adventofcode/year{year}/Day{day}'
 
     javaFile = f'{basePath}/Day{day}.java'
     sampleInputFile = f'{basePath}/input.txt'
