@@ -5,11 +5,11 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class Pair <T> {
-    private T first, second;
+public class Pair<T> {
+  private T first, second;
 
-    @Override
-    public String toString() {
-        return "(" + first + ", " + second + ")";
-    }
+  @Override
+  public String toString() {
+    return "(" + first + ", " + second + ")";
+  }
 }
