@@ -28,7 +28,8 @@ public class Day8 extends Day<Integer> {
     Map<Character, List<Pos>> nodePositions = extractNodePositions(lines);
     return nodePositions.values().stream()
         .flatMap(
-            positions -> countAntinodes(positions, lines.size(), lines.get(0).length()).stream())
+            positions ->
+                countAntinodes(positions, lines.size(), lines.getFirst().length()).stream())
         .collect(Collectors.toSet())
         .size();
   }
@@ -38,7 +39,8 @@ public class Day8 extends Day<Integer> {
     Map<Character, List<Pos>> nodePositions = extractNodePositions(lines);
     return nodePositions.values().stream()
         .flatMap(
-            positions -> countAntinodes2(positions, lines.size(), lines.get(0).length()).stream())
+            positions ->
+                countAntinodes2(positions, lines.size(), lines.getFirst().length()).stream())
         .collect(Collectors.toSet())
         .size();
   }
@@ -95,7 +97,7 @@ public class Day8 extends Day<Integer> {
   private Map<Character, List<Pos>> extractNodePositions(List<String> lines) {
     Map<Character, List<Pos>> nodePositions = new HashMap<>();
     for (int i = 0; i < lines.size(); i++) {
-      for (int j = 0; j < lines.get(0).length(); j++) {
+      for (int j = 0; j < lines.getFirst().length(); j++) {
         char c = lines.get(i).charAt(j);
         if (c != '.') {
           if (nodePositions.containsKey(c)) {
