@@ -32,6 +32,10 @@ public record Pos(int i, int j) {
   }
 
   public boolean isValid(List<String> lines) {
-    return i >= 0 && i < lines.size() && j >= 0 && j < lines.get(0).length();
+    return i >= 0 && i < lines.size() && j >= 0 && j < lines.getFirst().length();
+  }
+
+  public boolean isValid(int[][] map) {
+    return i >= 0 && i < map.length && j >= 0 && j < map[0].length;
   }
 }
