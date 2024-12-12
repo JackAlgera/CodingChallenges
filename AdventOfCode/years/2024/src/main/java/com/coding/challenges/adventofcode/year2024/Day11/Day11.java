@@ -1,5 +1,6 @@
 package com.coding.challenges.adventofcode.year2024.Day11;
 
+import com.coding.challenges.adventofcode.utils.Day;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -7,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import com.coding.challenges.adventofcode.utils.Day;
 
 public class Day11 extends Day<Long> {
 
@@ -33,9 +33,9 @@ public class Day11 extends Day<Long> {
 
   public Long blinks(List<String> lines, int count) {
     Map<Long, Long> stoneMap =
-            Arrays.stream(lines.getFirst().split(" "))
-                  .map(Long::parseLong)
-                  .collect(Collectors.toMap(Function.identity(), i -> 1L, (a, b) -> 2L));
+        Arrays.stream(lines.getFirst().split(" "))
+            .map(Long::parseLong)
+            .collect(Collectors.toMap(Function.identity(), i -> 1L, (a, b) -> 2L));
 
     for (int i = 0; i < count; i++) {
       stoneMap = blink(stoneMap);
