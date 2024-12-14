@@ -1,10 +1,10 @@
 package com.coding.challenges.adventofcode.year2024.Day13;
 
+import com.coding.challenges.adventofcode.utils.Day;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
-import com.coding.challenges.adventofcode.utils.Day;
 
 public class Day13 extends Day<Long> {
 
@@ -20,20 +20,18 @@ public class Day13 extends Day<Long> {
 
   @Override
   public Long part1(List<String> lines) {
-    return parseInput(lines, false).stream()
-            .mapToLong(this::solveEquation)
-            .sum();
+    return parseInput(lines, false).stream().mapToLong(this::solveEquation).sum();
   }
 
   @Override
   public Long part2(List<String> lines) {
-    return parseInput(lines, true).stream()
-                                   .mapToLong(this::solveEquation)
-                                   .sum();
+    return parseInput(lines, true).stream().mapToLong(this::solveEquation).sum();
   }
 
   public long solveEquation(Input input) {
-    double b = (input.buttonA.x * input.target.y - input.buttonA.y * input.target.x) / (double) (input.buttonA.x * input.buttonB.y - input.buttonA.y * input.buttonB.x);
+    double b =
+        (input.buttonA.x * input.target.y - input.buttonA.y * input.target.x)
+            / (double) (input.buttonA.x * input.buttonB.y - input.buttonA.y * input.buttonB.x);
     double a = (input.target.x - b * input.buttonB.x) / (double) input.buttonA.x;
 
     if (b != (long) b || a != (long) a || a < 0 || b < 0) {
@@ -77,7 +75,7 @@ public class Day13 extends Day<Long> {
               .map(
                   m -> {
                     long x = Long.parseLong(m.group(1)) + (isPart2 ? 10_000_000_000_000L : 0);
-                    long y = Long.parseLong(m.group(2)) + (isPart2 ? 10_000_000_000_000L : 0);;
+                    long y = Long.parseLong(m.group(2)) + (isPart2 ? 10_000_000_000_000L : 0);
                     return new Vector(x, y);
                   })
               .findFirst()
