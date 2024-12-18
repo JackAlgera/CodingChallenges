@@ -38,4 +38,16 @@ public record Pos(int i, int j) {
   public boolean isValid(int[][] map) {
     return i >= 0 && i < map.length && j >= 0 && j < map[0].length;
   }
+
+  public boolean isValid(long[][] map) {
+    return i >= 0 && i < map.length && j >= 0 && j < map[0].length;
+  }
+
+  public boolean isValid(char[][] map) {
+    return i >= 0 && i < map.length && j >= 0 && j < map[0].length;
+  }
+
+  public int manhattanDistance(Pos other) {
+    return Math.abs(i - other.i) + Math.abs(j - other.j);
+  }
 }
