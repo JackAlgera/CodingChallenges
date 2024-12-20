@@ -18,6 +18,18 @@ public class InputLinesUtilities {
     throw new IllegalArgumentException("Target not found");
   }
 
+  public Pos findChar(char[][] grid, char target) {
+    for (int i = 0; i < grid.length; i++) {
+      for (int j = 0; j < grid[0].length; j++) {
+        if (grid[i][j] == target) {
+          return new Pos(i, j);
+        }
+      }
+    }
+
+    throw new IllegalArgumentException("Target not found");
+  }
+
   public char[][] extractGrid(List<String> lines) {
     int maxI = lines.contains("") ? lines.indexOf("") : 0;
     char[][] grid = new char[maxI][lines.get(0).length()];
