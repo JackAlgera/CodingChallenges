@@ -1,6 +1,7 @@
 package com.coding.challenges.adventofcode.year2023.Day16;
 
 import com.coding.challenges.adventofcode.utils.Day;
+import com.coding.challenges.adventofcode.utils.InputLinesUtilities;
 import com.coding.challenges.adventofcode.utils.Utilities;
 import com.coding.challenges.adventofcode.utils.enums.Direction;
 import java.io.IOException;
@@ -22,12 +23,12 @@ public class Day16 extends Day<Integer> {
 
   @Override
   public Integer part1(List<String> lines) {
-    return bfs(parseInput(lines), 0, 0, Direction.E);
+    return bfs(InputLinesUtilities.extractGrid(lines), 0, 0, Direction.E);
   }
 
   @Override
   public Integer part2(List<String> lines) {
-    char[][] grid = parseInput(lines);
+    char[][] grid = InputLinesUtilities.extractGrid(lines);
     int height = lines.size();
     int width = lines.get(0).length();
     int maxEnergized = 0;
@@ -110,16 +111,6 @@ public class Day16 extends Day<Integer> {
             default -> List.of(beam);
           };
     };
-  }
-
-  public char[][] parseInput(List<String> lines) {
-    char[][] grid = new char[lines.size()][lines.get(0).length()];
-    for (int i = 0; i < lines.size(); i++) {
-      for (int j = 0; j < lines.get(0).length(); j++) {
-        grid[i][j] = lines.get(i).charAt(j);
-      }
-    }
-    return grid;
   }
 
   public int countEnergizedTiles(boolean[][][] visisted) {

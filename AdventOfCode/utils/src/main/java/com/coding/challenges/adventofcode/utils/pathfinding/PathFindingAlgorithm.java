@@ -4,7 +4,7 @@ import com.coding.challenges.adventofcode.utils.Pos;
 
 public interface PathFindingAlgorithm {
 
-  public long solve(char[][] grid, Pos start, Pos end, char wallChar);
+  long solve(char[][] grid, Pos start, Pos end, char wallChar);
 
   record Node(Pos pos, int steps, int h) {
     @Override

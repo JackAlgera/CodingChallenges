@@ -1,6 +1,7 @@
 package com.coding.challenges.adventofcode.year2024.Day20;
 
 import com.coding.challenges.adventofcode.utils.Day;
+import com.coding.challenges.adventofcode.utils.InputLinesUtilities;
 import com.coding.challenges.adventofcode.utils.Pos;
 import com.coding.challenges.adventofcode.utils.enums.Direction;
 import java.io.IOException;
@@ -33,7 +34,7 @@ public class Day20 extends Day<Long> {
   }
 
   private long solve(List<String> lines, int cheats, int totalSaved) {
-    char[][] grid = extractGrid(lines);
+    char[][] grid = InputLinesUtilities.extractGrid(lines);
     Pos start = null;
     for (int i = 0; i < grid.length; i++) {
       for (int j = 0; j < grid[0].length; j++) {
@@ -87,16 +88,5 @@ public class Day20 extends Day<Long> {
     }
 
     return distances;
-  }
-
-  private char[][] extractGrid(List<String> lines) {
-    char[][] grid = new char[lines.size()][lines.get(0).length()];
-    for (int i = 0; i < lines.size(); i++) {
-      for (int j = 0; j < lines.get(0).length(); j++) {
-        grid[i][j] = lines.get(i).charAt(j);
-      }
-    }
-
-    return grid;
   }
 }
