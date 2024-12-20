@@ -2,14 +2,9 @@ package com.coding.challenges.adventofcode.year2024.Day18;
 
 import com.coding.challenges.adventofcode.utils.Day;
 import com.coding.challenges.adventofcode.utils.Pos;
-import com.coding.challenges.adventofcode.utils.enums.Direction;
+import com.coding.challenges.adventofcode.utils.pathfinding.PathFindingAlgorithms;
 import java.io.IOException;
-import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Queue;
-import java.util.Set;
 
 public class Day18 extends Day<String> {
 
@@ -29,8 +24,12 @@ public class Day18 extends Day<String> {
     int maxJ = lines.size() < 100 ? 7 : 71;
     int nbrBytes = lines.size() < 100 ? 12 : 1024;
 
-    return aStar(
-        createGrid(lines, nbrBytes, maxI, maxJ), new Pos(0, 0), new Pos(maxI - 1, maxJ - 1));
+    return ""
+        + PathFindingAlgorithms.A_STAR.solve(
+            createGrid(lines, nbrBytes, maxI, maxJ),
+            new Pos(0, 0),
+            new Pos(maxI - 1, maxJ - 1),
+            '#');
   }
 
   @Override
@@ -40,9 +39,10 @@ public class Day18 extends Day<String> {
     int nbrBytes = lines.size() < 100 ? 12 : 1024;
 
     for (int i = nbrBytes; i < lines.size(); i++) {
-      String result =
-          aStar(createGrid(lines, i, maxI, maxJ), new Pos(0, 0), new Pos(maxI - 1, maxJ - 1));
-      if (result.equals("oops")) {
+      long steps =
+          PathFindingAlgorithms.A_STAR.solve(
+              createGrid(lines, i, maxI, maxJ), new Pos(0, 0), new Pos(maxI - 1, maxJ - 1), '#');
+      if (steps == -1L) {
         return lines.get(i - 1);
       }
     }
@@ -66,50 +66,5 @@ public class Day18 extends Day<String> {
       grid[pos.j()][pos.i()] = '#';
     }
     return grid;
-  }
-
-  public String aStar(char[][] grid, Pos start, Pos end) {
-    Queue<Node> open = new PriorityQueue<>(Comparator.comparingInt(n -> n.h));
-    Set<Pos> closed = new HashSet<>();
-    open.add(new Node(start, 0, start.manhattanDistance(end)));
-
-    while (!open.isEmpty()) {
-      Node current = open.poll();
-      closed.add(current.pos);
-
-      if (current.pos.equals(end)) {
-        return "" + current.steps();
-      }
-
-      for (Direction d : Direction.values()) {
-        Pos newPos = current.pos.move(d);
-        Node newNode =
-            new Node(
-                newPos, current.steps() + 1, newPos.manhattanDistance(end) + current.steps() + 1);
-        if (!newPos.isValid(grid)
-            || grid[newPos.i()][newPos.j()] == '#'
-            || closed.contains(newNode.pos)) {
-          continue;
-        }
-
-        Node existingNode =
-            open.stream().filter(n -> n.pos.equals(newPos)).findFirst().orElse(null);
-        if (existingNode != null && newNode.steps() < existingNode.steps()) {
-          open.remove(existingNode);
-          open.add(newNode);
-        } else {
-          open.add(newNode);
-        }
-      }
-    }
-
-    return "oops";
-  }
-
-  public record Node(Pos pos, int steps, int h) {
-    @Override
-    public boolean equals(Object o) {
-      return pos.equals(((Node) o).pos);
-    }
   }
 }

@@ -25,9 +25,11 @@ public class Day19 extends Day<Long> {
   public Long part1(List<String> lines) {
     Set<String> towels = Arrays.stream(lines.get(0).split(", ")).collect(Collectors.toSet());
 
-    return lines.stream().skip(2).map(design -> isPossible(towels, design))
-         .mapToLong(i -> i ? 1 : 0)
-            .sum();
+    return lines.stream()
+        .skip(2)
+        .map(design -> isPossible(towels, design))
+        .mapToLong(i -> i ? 1 : 0)
+        .sum();
   }
 
   @Override
@@ -35,9 +37,7 @@ public class Day19 extends Day<Long> {
     Set<String> towels = Arrays.stream(lines.get(0).split(", ")).collect(Collectors.toSet());
     Map<String, Long> dp = new HashMap<>();
 
-    return lines.stream().skip(2)
-                .mapToLong(design -> addPossible(towels, design, dp))
-                .sum();
+    return lines.stream().skip(2).mapToLong(design -> addPossible(towels, design, dp)).sum();
   }
 
   public long addPossible(Set<String> towels, String design, Map<String, Long> dp) {
