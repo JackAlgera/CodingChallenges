@@ -27,6 +27,10 @@ public record Pos(int i, int j) {
     };
   }
 
+  public boolean isValid(Pos max) {
+    return i >= 0 && i < max.i() && j >= 0 && j < max.j();
+  }
+
   public boolean isValid(int maxI, int maxJ) {
     return i >= 0 && i < maxI && j >= 0 && j < maxJ;
   }
