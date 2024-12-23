@@ -31,7 +31,7 @@ public class InputLinesUtilities {
   }
 
   public char[][] extractGrid(List<String> lines) {
-    int maxI = lines.contains("") ? lines.indexOf("") : 0;
+    int maxI = lines.contains("") ? lines.indexOf("") : lines.size();
     char[][] grid = new char[maxI][lines.get(0).length()];
 
     for (int i = 0; i < maxI; i++) {
