@@ -1,5 +1,6 @@
 package com.coding.challenges.adventofcode.year2024.Day23;
 
+import com.coding.challenges.adventofcode.utils.Day;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,7 +10,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import com.coding.challenges.adventofcode.utils.Day;
 
 public class Day23 extends Day<String> {
 
@@ -43,7 +43,11 @@ public class Day23 extends Day<String> {
       }
     }
 
-    return "" + tuples.stream().filter(t -> t.pc1().startsWith("t") || t.pc2().startsWith("t") || t.pc3().startsWith("t")).count();
+    return ""
+        + tuples.stream()
+            .filter(
+                t -> t.pc1().startsWith("t") || t.pc2().startsWith("t") || t.pc3().startsWith("t"))
+            .count();
   }
 
   @Override
@@ -82,20 +86,24 @@ public class Day23 extends Day<String> {
   }
 
   private Map<String, Set<String>> getPcs(List<String> lines) {
-    Map<String, Set<String>> pcs =new HashMap<>();
+    Map<String, Set<String>> pcs = new HashMap<>();
     for (String connection : lines) {
       String pc1 = connection.split("-")[0];
       String pc2 = connection.split("-")[1];
-      pcs.compute(pc1, (k, v) -> {
-        if (v == null) return new HashSet<>(Set.of(pc2));
-        v.add(pc2);
-        return v;
-      });
-      pcs.compute(pc2, (k, v) -> {
-        if (v == null) return new HashSet<>(Set.of(pc1));
-        v.add(pc1);
-        return v;
-      });
+      pcs.compute(
+          pc1,
+          (k, v) -> {
+            if (v == null) return new HashSet<>(Set.of(pc2));
+            v.add(pc2);
+            return v;
+          });
+      pcs.compute(
+          pc2,
+          (k, v) -> {
+            if (v == null) return new HashSet<>(Set.of(pc1));
+            v.add(pc1);
+            return v;
+          });
     }
 
     return pcs;
