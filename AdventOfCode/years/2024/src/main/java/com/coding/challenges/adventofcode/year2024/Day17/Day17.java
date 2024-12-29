@@ -25,7 +25,18 @@ public class Day17 extends Day<String> {
 
   @Override
   public String part1(List<String> lines) {
-    return runProgram(lines).stream().map(String::valueOf).collect(Collectors.joining(","));
+    List<Instruction> instructions = extractInstructions(lines);
+
+    long registerA = Long.parseLong(lines.get(0).split(" A: ")[1]);
+    List<Integer> output = new ArrayList<>();
+
+    while (registerA != 0) {
+      List<Long> loop = runOneLoop(instructions, registerA);
+      output.add(loop.get(1).intValue());
+      registerA = loop.get(0);
+    }
+
+    return output.stream().map(String::valueOf).collect(Collectors.joining(","));
   }
 
   @Override
@@ -39,13 +50,13 @@ public class Day17 extends Day<String> {
     List<Long> solutions = new ArrayList<>();
     List<Instruction> instructions = extractInstructions(lines);
     for (int i = 0; i < 8; i++) {
-      something(solutions, instructions, programs, i, 0);
+      solve(solutions, instructions, programs, i, 0);
     }
 
     return "" + solutions.get(0);
   }
 
-  public void something(
+  public void solve(
       List<Long> solutions,
       List<Instruction> instructions,
       List<Long> programs,
@@ -60,7 +71,7 @@ public class Day17 extends Day<String> {
       solutions.add(registerA);
     } else {
       for (int i = 0; i < 8; i++) {
-        something(solutions, instructions, programs, registerA * 8 + i, col + 1);
+        solve(solutions, instructions, programs, registerA * 8 + i, col + 1);
       }
     }
   }
@@ -89,30 +100,6 @@ public class Day17 extends Day<String> {
     }
 
     return List.of(registerA, out);
-  }
-
-  public List<Integer> runProgram(List<String> lines) {
-    List<Integer> programs =
-        Arrays.stream(lines.get(4).substring(9).split(","))
-            .mapToInt(Integer::parseInt)
-            .boxed()
-            .toList();
-    List<Instruction> instructions =
-        IntStream.range(0, programs.size() / 2)
-            .map(i -> i * 2)
-            .mapToObj(i -> new Instruction(programs.get(i), programs.get(i + 1)))
-            .toList();
-
-    long registerA = Long.parseLong(lines.get(0).split(" A: ")[1]);
-    List<Integer> output = new ArrayList<>();
-
-    while (registerA != 0) {
-      List<Long> loop = runOneLoop(instructions, registerA);
-      output.add(loop.get(1).intValue());
-      registerA = loop.get(0);
-    }
-
-    return output;
   }
 
   public List<Instruction> extractInstructions(List<String> lines) {

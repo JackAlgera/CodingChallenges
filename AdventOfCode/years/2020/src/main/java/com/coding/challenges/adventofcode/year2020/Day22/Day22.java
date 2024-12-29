@@ -1,7 +1,7 @@
 package com.coding.challenges.adventofcode.year2020.Day22;
 
+import com.coding.challenges.adventofcode.utils.Day;
 import java.io.IOException;
-import java.util.ArrayDeque;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
-import java.util.stream.Stream;
-import com.coding.challenges.adventofcode.utils.Day;
 
 public class Day22 extends Day<Long> {
 
@@ -63,7 +61,8 @@ public class Day22 extends Day<Long> {
     }
   }
 
-  public boolean recursiveCombat(Queue<Integer> p1, Queue<Integer> p2, boolean isPart2, Map<String, Boolean> cache) {
+  public boolean recursiveCombat(
+      Queue<Integer> p1, Queue<Integer> p2, boolean isPart2, Map<String, Boolean> cache) {
     String key = p1.toString() + p2.toString();
     if (cache.containsKey(key)) {
       return cache.get(key);
