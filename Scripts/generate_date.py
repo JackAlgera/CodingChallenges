@@ -11,11 +11,11 @@ environment = Environment(loader=FileSystemLoader("templates/"))
 @click.option('--response-class', type=click.Choice(['integer', 'long', 'string']), default='integer',
               help='The puzzle response type')
 def cli(year, day, response_class):
-    print(f'Generating data for {year} and {day}')
+    print(f'Generating data for {year} and {"{:02d}".format(day)}')
 
-    basePath = f'../AdventOfCode/years/{year}/src/main/java/com/coding/challenges/adventofcode/year{year}/Day{day}'
+    basePath = f'../AdventOfCode/years/{year}/src/main/java/com/coding/challenges/adventofcode/year{year}/Day{"{:02d}".format(day)}'
 
-    javaFile = f'{basePath}/Day{day}.java'
+    javaFile = f'{basePath}/Day{"{:02d}".format(day)}.java'
     sampleInputFile = f'{basePath}/input.txt'
     inputFile = f'{basePath}/sample-input.txt'
 
