@@ -1,11 +1,10 @@
 package com.coding.challenges.adventofcode.year2020.Day23;
 
+import com.coding.challenges.adventofcode.utils.Day;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import com.coding.challenges.adventofcode.utils.Day;
 
 public class Day23 extends Day<Long> {
 
@@ -14,9 +13,9 @@ public class Day23 extends Day<Long> {
 
     day.printPart1("sample-input", 67384529L);
     day.printPart1("input", 49725386L);
-//
-//    day.printPart2("sample-input", 0L);
-//    day.printPart2("input", 0L);
+    //
+    //    day.printPart2("sample-input", 0L);
+    //    day.printPart2("input", 0L);
   }
 
   @Override
