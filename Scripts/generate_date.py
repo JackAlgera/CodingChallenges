@@ -24,7 +24,7 @@ def cli(year, day, response_class):
 
     content = environment.get_template(f'day-template.java').render(
         year=year,
-        day=day,
+        day="{:02d}".format(day),
         type=response_class.capitalize(),
         default_value=default_value(response_class)
     )
