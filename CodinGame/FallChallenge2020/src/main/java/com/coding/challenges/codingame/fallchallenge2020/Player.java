@@ -1,4 +1,4 @@
-package CodinGame.FallChallenge2020;
+package com.coding.challenges.codingame.fallchallenge2020;
 
 import java.util.ArrayList;
 import java.util.Collection;
