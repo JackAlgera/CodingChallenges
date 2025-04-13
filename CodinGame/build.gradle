@@ -37,12 +37,10 @@ subprojects {
         annotationProcessor 'org.projectlombok:lombok:1.18.30'
 
         // Use JUnit Jupiter for testing.
-        testImplementation 'org.junit.jupiter:junit-jupiter:5.9.3'
+        testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+        testImplementation 'org.assertj:assertj-core:3.27.3'
 
         testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-
-        // This dependency is used by the application.
-        implementation 'com.google.guava:guava:32.1.1-jre'
     }
 
     spotless {
@@ -54,9 +52,4 @@ subprojects {
             trimTrailingWhitespace()
         }
     }
-}
-
-tasks.named('test') {
-    // Use JUnit Platform for unit tests.
-    useJUnitPlatform()
 }
