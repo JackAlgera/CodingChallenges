@@ -7,11 +7,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 class Player {
 
-  static final int BOMB_DAMAGE = 40; // Damage dealt by a bomb
+  static final int BOMB_DAMAGE = 30; // Damage dealt by a bomb
   static final int MAX_THROW_DISTANCE = 4; // Max distance for throwing bombs
   static final int KILL_BONUS = 1000;
   static final int PUSH_OVER_50_BONUS = 200;
@@ -23,22 +24,21 @@ class Player {
       List<String> commands = new ArrayList<>();
       GameState gameState = game.nextState();
 
+      Map<Integer, Position> plannedSteps = Voronoi.planBestVoronoiMoves(gameState);
       for (Agent myAgent : gameState.myAgents) {
-        var bestShootTarget = chooseBestShootTarget(myAgent, gameState);
-        var bestThrowTarget = chooseBestThrowTarget(myAgent, gameState);
+        var bestStep = plannedSteps.getOrDefault(myAgent.agentId, new Position(myAgent.x, myAgent.y));
+        var myAgentMoved = myAgent.move(bestStep.x, bestStep.y);
+        var bestCombat = Stream.of(chooseBestShootTarget(myAgentMoved, gameState), chooseBestThrowTarget(myAgentMoved, plannedSteps, gameState))
+                               .flatMap(Optional::stream)
+                               .max(Comparator.comparingDouble(c -> c.score))
+                               .orElse(new CombatChoice(new HunkerDown(), 0.0))
+                .combat;
 
-        var best = Stream.of(bestShootTarget, bestThrowTarget)
-                .flatMap(Optional::stream)
-                .max(Comparator.comparingDouble(c -> c.score));
-        if (best.isPresent()) {
-          commands.add(Command.of(myAgent.agentId, best.get().combat));
-          continue;
+        if (bestStep.x == myAgent.x && bestStep.y == myAgent.y) {
+          commands.add(Command.of(myAgent.agentId, bestCombat));
+        } else {
+          commands.add(Command.of(myAgent.agentId, new Move(bestStep.x, bestStep.y), bestCombat));
         }
-
-        var furthestEnemy = gameState.enemyAgents.stream()
-            .max(Comparator.comparingInt(a -> distance(myAgent, a)))
-            .get();
-        commands.add(Command.of(myAgent.agentId, new Move(furthestEnemy.x, furthestEnemy.y)));
       }
 
       commands.forEach(System.out::println);
@@ -54,6 +54,10 @@ class Player {
   }
 
   static boolean isInBombAOE(Agent target, int bombX, int bombY) {
+    return isInBombAOE(new Position(target.x, target.y), bombX, bombY);
+  }
+
+  static boolean isInBombAOE(Position target, int bombX, int bombY) {
     for (int dx = -1; dx <= 1; dx++) {
       for (int dy = -1; dy <= 1; dy++) {
         int x = bombX + dx;
@@ -67,7 +71,104 @@ class Player {
     return false;
   }
 
-  static Optional<CombatChoice> chooseBestThrowTarget(Agent thrower, GameState gameState) {
+  record Voronoi() {
+    // N, E, S, W
+    private static final List<Position> MOVES = List.of(new Position(0, -1), new Position(1, 0), new Position(0, 1), new Position(-1, 0));
+
+    private record StepScore(int agentId, Position position, int score) {}
+
+    static Map<Integer, Position> planBestVoronoiMoves(GameState gameState) {
+      // Get all planned steps for each agent based on Voronoi scoring
+      Map<Integer, StepScore> plannedSteps = new HashMap<>();
+
+      for (Agent agent : gameState.myAgents) {
+        plannedSteps.put(agent.agentId, chooseBestVoronoiStep(agent, gameState));
+      }
+
+      // Remove duplicates steps by choosing the best score for each position
+      Map<Position, StepScore> bestSteps = new HashMap<>();
+      for (StepScore step : plannedSteps.values()) {
+        bestSteps.merge(step.position, step, (existingStep, newStep) -> newStep.score > existingStep.score ? newStep : existingStep);
+      }
+
+      return bestSteps.entrySet().stream().collect(Collectors.toMap((entry) -> entry.getValue().agentId, Map.Entry::getKey));
+    }
+
+    static StepScore chooseBestVoronoiStep(Agent agent, GameState gameState) {
+      Position bestPosition = new Position(agent.x, agent.y);
+      int bestScore = voronoiScore(gameState.myAgents, gameState.enemyAgents, gameState.grid);
+
+      for (Position move : MOVES) {
+        int dx = agent.x + move.x;
+        int dy = agent.y + move.y;
+        if (!isFreeCell(gameState, dx, dy)) continue;
+
+        List<Agent> myAgents = withAgentMoved(gameState.myAgents, agent, dx, dy);
+        int score = voronoiScore(myAgents, gameState.enemyAgents, gameState.grid);
+        if (score > bestScore) {
+          bestScore = score;
+          bestPosition = new Position(dx, dy);
+        }
+      }
+
+      return new StepScore(agent.agentId, bestPosition, bestScore);
+    }
+
+    static List<Agent> withAgentMoved(List<Agent> myAgents, Agent agent, int dx, int dy) {
+      List<Agent> copy = new ArrayList<>();
+
+      for (Agent a : myAgents) {
+        if (a.agentId == agent.agentId) {
+          copy.add(agent.move(dx, dy));
+        } else {
+          copy.add(a);
+        }
+      }
+
+      return copy;
+    }
+
+    static int voronoiScore(List<Agent> myAgents, List<Agent> enemyAgents, Grid grid) {
+      int score = 0;
+      for (int x = 0; x < grid.width; x++) {
+        for (int y = 0; y < grid.height; y++) {
+          int myMinDistance = Integer.MAX_VALUE;
+          for (Agent a : myAgents) {
+            myMinDistance = Math.min(myMinDistance, effectiveDistanceTo(a, x, y));
+          }
+
+          int enemyDistance = Integer.MAX_VALUE;
+          for (Agent a : enemyAgents) {
+            enemyDistance = Math.min(enemyDistance, effectiveDistanceTo(a, x, y));
+          }
+
+          if (myMinDistance < enemyDistance) score += 1;
+          else if (myMinDistance > enemyDistance) score -= 1;
+        }
+      }
+
+      return score;
+    }
+
+    static int effectiveDistanceTo(Agent agent, int x, int y) {
+      int d = Math.abs(agent.x - x) + Math.abs(agent.y - y);
+      return agent.wetness >= 50 ? (d * 2) : d;
+    }
+
+    static boolean isFreeCell(GameState gameState, int x, int y) {
+      if (!gameState.grid.inBounds(x, y)) return false;
+      if (!gameState.grid.passable(x, y)) return false;
+      for (Agent a : gameState.myAgents) {
+        if (a.x == x && a.y == y) return false;
+      }
+      for (Agent a : gameState.enemyAgents) {
+        if (a.x == x && a.y == y) return false;
+      }
+      return true;
+    }
+  }
+
+  static Optional<CombatChoice> chooseBestThrowTarget(Agent thrower, Map<Integer, Position> plannedSteps, GameState gameState) {
     if (!thrower.canThrow()) return Optional.empty();
 
     int bestX = -1;
@@ -84,7 +185,8 @@ class Player {
         double score = 0.0;
 
         for (Agent myAgent : gameState.myAgents) {
-          if (isInBombAOE(myAgent, x, y)) {
+          var plannedStep = plannedSteps.getOrDefault(myAgent.agentId, new Position(myAgent.x, myAgent.y));
+          if (isInBombAOE(plannedStep, x, y)) {
             score = Double.NEGATIVE_INFINITY; // Don't throw bombs where our agents are
             break;
           }
@@ -120,7 +222,7 @@ class Player {
       var damage = expectedShootDamage(shooter, enemy, gameState.grid);
       if (damage <= 0.0) continue;
 
-      double score = scoreDamage(enemy, (int) damage);
+      double score = scoreDamage(enemy, damage);
       if (score > bestScore) {
         bestScore = score;
         bestEnemy = enemy;
@@ -131,10 +233,10 @@ class Player {
     return Optional.ofNullable(bestEnemy).map(e -> new CombatChoice(new Shoot(e.agentId), finalBestScore));
   }
 
-  static double scoreDamage(Agent enemy, int damage) {
-    double score = 0.0;
-    int newWetness = enemy.wetness + damage;
+  static double scoreDamage(Agent enemy, double damage) {
+    int newWetness = enemy.wetness + (int) Math.round(damage);
 
+    double score = 0.0;
     if (newWetness >= 100) score += KILL_BONUS;
     if (enemy.wetness < 50 && newWetness >= 50) score += PUSH_OVER_50_BONUS;
 
@@ -163,7 +265,7 @@ class Player {
       int cy = target.y + dir[1];
 
       if (!grid.inBounds(cx, cy) ||
-          grid.tiles[cy][cx].equals(TileType.EMPTY) ||
+          grid.tiles[cy][cx] == TileType.EMPTY ||
           distance(shooter, cx, cy) == 1) {
         continue;
       }
@@ -267,13 +369,17 @@ class Player {
       this(agentId, player, shootCooldown, optimalRange, soakingPower, splashBombs, 0, 0, 0);
     }
 
+    public Agent move(int x, int y) {
+      return new Agent(this.agentId, this.player, this.shootCooldown, this.optimalRange, this.soakingPower, this.splashBombs, this.wetness, x, y);
+    }
+
     public Agent updateLive(Scanner in) {
       var newX = in.nextInt();
-      var nexY = in.nextInt();
+      var newY = in.nextInt();
       var newCooldown = in.nextInt();
       var newSplashBombs = in.nextInt();
       var newWetness = in.nextInt();
-      return new Agent(this.agentId, this.player, newCooldown, this.optimalRange, this.soakingPower, newSplashBombs, newWetness, newX, nexY);
+      return new Agent(this.agentId, this.player, newCooldown, this.optimalRange, this.soakingPower, newSplashBombs, newWetness, newX, newY);
     }
 
     public boolean canShoot() {
@@ -302,6 +408,7 @@ class Player {
       return agentId + ";" + String.join(";", commands);
     }
   }
+  record Position(int x, int y) {}
 
   interface Combat { String encode(); }
   record Shoot(int targetId) implements Combat { public String encode() { return "SHOOT %d".formatted(targetId); } }
