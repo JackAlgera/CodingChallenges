@@ -1,16 +1,15 @@
 package com.coding.challenges.adventofcode.year2019.Day03;
 
+import com.coding.challenges.adventofcode.utils.Day;
+import com.coding.challenges.adventofcode.utils.Pos;
+import com.coding.challenges.adventofcode.utils.enums.Direction;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.BiFunction;
-import com.coding.challenges.adventofcode.utils.Day;
-import com.coding.challenges.adventofcode.utils.Pos;
-import com.coding.challenges.adventofcode.utils.enums.Direction;
 
 public class Day03 extends Day<Long> {
 
@@ -32,7 +31,8 @@ public class Day03 extends Day<Long> {
     List<Path> l2 = parsePaths(lines.get(1));
 
     Set<Pos> wire1Positions = tracePath(l1, (pos, steps) -> true).keySet();
-    return traceAndFindMinIntersection(l2, wire1Positions, (pos, steps) -> (long) Math.abs(pos.i()) + Math.abs(pos.j()));
+    return traceAndFindMinIntersection(
+        l2, wire1Positions, (pos, steps) -> (long) Math.abs(pos.i()) + Math.abs(pos.j()));
   }
 
   @Override
@@ -41,7 +41,8 @@ public class Day03 extends Day<Long> {
     List<Path> l2 = parsePaths(lines.get(1));
 
     Map<Pos, Integer> wire1Steps = tracePath(l1, (pos, steps) -> steps);
-    return traceAndFindMinIntersection(l2, wire1Steps.keySet(), (pos, steps) -> (long) steps + wire1Steps.get(pos));
+    return traceAndFindMinIntersection(
+        l2, wire1Steps.keySet(), (pos, steps) -> (long) steps + wire1Steps.get(pos));
   }
 
   private <T> Map<Pos, T> tracePath(List<Path> paths, BiFunction<Pos, Integer, T> valueFunction) {
@@ -62,7 +63,10 @@ public class Day03 extends Day<Long> {
     return visitedPositions;
   }
 
-  private Long traceAndFindMinIntersection(List<Path> paths, Set<Pos> intersectionPositions, BiFunction<Pos, Integer, Long> distanceFunction) {
+  private Long traceAndFindMinIntersection(
+      List<Path> paths,
+      Set<Pos> intersectionPositions,
+      BiFunction<Pos, Integer, Long> distanceFunction) {
     long minDistance = Long.MAX_VALUE;
     Pos pos = new Pos(0, 0);
     int steps = 0;
@@ -88,7 +92,8 @@ public class Day03 extends Day<Long> {
 
   record Path(Direction direction, int distance) {
     public Path(String string) {
-      this(Direction.fromOrientation(string.substring(0, 1)), Integer.parseInt(string.substring(1)));
+      this(
+          Direction.fromOrientation(string.substring(0, 1)), Integer.parseInt(string.substring(1)));
     }
   }
 }
