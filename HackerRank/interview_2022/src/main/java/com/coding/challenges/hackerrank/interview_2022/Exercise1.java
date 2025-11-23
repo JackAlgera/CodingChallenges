@@ -1,4 +1,4 @@
-package jackalgera.a360Learning;
+package com.coding.challenges.hackerrank.interview_2022;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -23,3 +23,6 @@ include 'CodinGame:SpringChallenge2021'
 include 'CodinGame:SpringChallenge2023'
 include 'CodinGame:SpringChallenge2025'
 include 'CodinGame:SummerChallenge2025'
+
+// Hackerrank
+include 'HackerRank:interview_2022'

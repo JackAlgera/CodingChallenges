@@ -1,4 +1,4 @@
-package jackalgera.a360Learning;
+package com.coding.challenges.hackerrank.interview_2022;
 
 public class Exercise2 {
 
