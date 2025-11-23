@@ -1,4 +1,4 @@
-package foobargoogleinterview;
+package com.coding.challenges.google.foobar;
 
 import java.util.Arrays;
 import java.util.Collections;

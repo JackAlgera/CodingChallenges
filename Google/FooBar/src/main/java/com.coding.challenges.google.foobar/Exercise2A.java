@@ -1,4 +1,4 @@
-package foobargoogleinterview;
+package com.coding.challenges.google.foobar;
 
 public class Exercise2A {
     public static void main(String[] args) {
