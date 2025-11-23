@@ -1,8 +1,8 @@
 pluginManagement {
-    repositories {
-        // Use the Gradle Plugin Portal for resolving plugins.
-        gradlePluginPortal()
-    }
+  repositories {
+    // Use the Gradle Plugin Portal for resolving plugins.
+    gradlePluginPortal()
+  }
 }
 
 rootProject.name = 'coding-challenges'
@@ -31,3 +31,7 @@ include 'Google:FooBar'
 
 // Hackerrank
 include 'HackerRank:interview_2022'
+
+// LeetCode
+include 'LeetCode:Easy'
+include 'LeetCode:Medium'
