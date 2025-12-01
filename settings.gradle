@@ -8,6 +8,7 @@ pluginManagement {
 rootProject.name = 'coding-challenges'
 
 // Advent of Code
+include 'AdventOfCode:years:2025'
 include 'AdventOfCode:years:2024'
 include 'AdventOfCode:years:2023'
 include 'AdventOfCode:years:2022'
