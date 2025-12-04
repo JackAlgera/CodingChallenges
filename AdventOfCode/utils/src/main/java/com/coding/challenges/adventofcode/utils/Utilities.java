@@ -42,22 +42,22 @@ public class Utilities {
     return pos.i() >= 0 && pos.i() < maxI && pos.j() >= 0 && pos.j() < maxJ;
   }
 
-  public static <T> void printGrid(T[][] grid) {
-    System.out.println();
-    for (int i = 0; i < grid.length; i++) {
-      for (int j = 0; j < grid[0].length; j++) {
-        System.out.print(grid[i][j]);
-      }
-      System.out.println();
-    }
-  }
-
   public static <T> void deepCopy(T[][] grid, T[][] temp) {
     for (int i = 0; i < grid.length; i++) {
       for (int j = 0; j < grid[0].length; j++) {
         grid[i][j] = temp[i][j];
       }
     }
+  }
+
+  public static char[][] deepCopy(char[][] grid) {
+    char[][] copy = new char[grid.length][grid[0].length];
+    for (int i = 0; i < grid.length; i++) {
+      for (int j = 0; j < grid[0].length; j++) {
+        copy[i][j] = grid[i][j];
+      }
+    }
+    return copy;
   }
 
   /**
