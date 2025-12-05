@@ -1,9 +1,9 @@
 package com.coding.challenges.adventofcode.year2025.Day03;
 
+import com.coding.challenges.adventofcode.utils.Day;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import com.coding.challenges.adventofcode.utils.Day;
 
 public class Day03 extends Day<Long> {
 

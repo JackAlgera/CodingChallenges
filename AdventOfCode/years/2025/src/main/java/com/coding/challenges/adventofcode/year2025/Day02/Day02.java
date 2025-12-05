@@ -1,10 +1,10 @@
 package com.coding.challenges.adventofcode.year2025.Day02;
 
+import com.coding.challenges.adventofcode.utils.Day;
 import java.io.IOException;
 import java.util.List;
 import java.util.function.Function;
 import java.util.regex.Pattern;
-import com.coding.challenges.adventofcode.utils.Day;
 
 public class Day02 extends Day<Long> {
 

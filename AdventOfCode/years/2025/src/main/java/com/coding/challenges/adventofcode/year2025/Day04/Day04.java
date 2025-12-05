@@ -1,10 +1,10 @@
 package com.coding.challenges.adventofcode.year2025.Day04;
 
-import java.io.IOException;
-import java.util.List;
 import com.coding.challenges.adventofcode.utils.Day;
 import com.coding.challenges.adventofcode.utils.InputLinesUtilities;
 import com.coding.challenges.adventofcode.utils.Utilities;
+import java.io.IOException;
+import java.util.List;
 
 public class Day04 extends Day<Long> {
 
