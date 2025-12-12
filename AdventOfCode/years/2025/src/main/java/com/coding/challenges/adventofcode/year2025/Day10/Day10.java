@@ -1,5 +1,6 @@
 package com.coding.challenges.adventofcode.year2025.Day10;
 
+import com.coding.challenges.adventofcode.utils.Day;
 import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -7,7 +8,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.regex.Pattern;
-import com.coding.challenges.adventofcode.utils.Day;
 
 public class Day10 extends Day<Long> {
 
@@ -79,14 +79,16 @@ public class Day10 extends Day<Long> {
         if (Math.abs(matrix[sel][col]) < 1e-9) continue;
 
         var tmp = matrix[pivotRow];
-        matrix[pivotRow] = matrix[sel]; matrix[sel] = tmp;
+        matrix[pivotRow] = matrix[sel];
+        matrix[sel] = tmp;
         var pivotVal = matrix[pivotRow][col];
         for (int j = col; j <= variablesCount; j++) matrix[pivotRow][j] /= pivotVal;
 
         for (int i = 0; i < equationCount; i++) {
           if (i != pivotRow) {
             double factor = matrix[i][col];
-            for (int j = col; j <= variablesCount; j++) matrix[i][j] -= factor * matrix[pivotRow][j];
+            for (int j = col; j <= variablesCount; j++)
+              matrix[i][j] -= factor * matrix[pivotRow][j];
           }
         }
 
@@ -102,7 +104,12 @@ public class Day10 extends Day<Long> {
       return solveFreeVars(matrix, freeVars, pivotCols, 0, new double[variablesCount]);
     }
 
-    private long solveFreeVars(double[][] matrix, List<Integer> freeVariables, List<Integer> pivotColumns, int idx, double[] solution) {
+    private long solveFreeVars(
+        double[][] matrix,
+        List<Integer> freeVariables,
+        List<Integer> pivotColumns,
+        int idx,
+        double[] solution) {
       if (idx == freeVariables.size()) {
         long currentPresses = 0;
 
@@ -121,7 +128,7 @@ public class Day10 extends Day<Long> {
           }
 
           solution[pc] = Math.round(val);
-          currentPresses += (long)solution[pc];
+          currentPresses += (long) solution[pc];
           pivotRow++;
         }
         return currentPresses;

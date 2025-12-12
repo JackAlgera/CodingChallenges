@@ -1,5 +1,6 @@
 package com.coding.challenges.adventofcode.year2025.Day11;
 
+import com.coding.challenges.adventofcode.utils.Day;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,8 +8,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
-import com.coding.challenges.adventofcode.utils.Day;
 
 public class Day11 extends Day<Long> {
 
@@ -25,16 +24,23 @@ public class Day11 extends Day<Long> {
   @Override
   public Long part1(List<String> lines) {
     var nodes = parseInput(lines);
-    return countPaths(nodes.get("you"), nodes.get("out"), Set.of(), new HashSet<>(), new HashMap<>());
+    return countPaths(
+        nodes.get("you"), nodes.get("out"), Set.of(), new HashSet<>(), new HashMap<>());
   }
 
   @Override
   public Long part2(List<String> lines) {
     var nodes = parseInput(lines);
-    return countPaths(nodes.get("svr"), nodes.get("out"), Set.of("dac", "fft"), new HashSet<>(), new HashMap<>());
+    return countPaths(
+        nodes.get("svr"), nodes.get("out"), Set.of("dac", "fft"), new HashSet<>(), new HashMap<>());
   }
 
-  private long countPaths(Node start, Node end, Set<String> requiredNodes, Set<String> foundNodes, Map<NodeState, Long> dp) {
+  private long countPaths(
+      Node start,
+      Node end,
+      Set<String> requiredNodes,
+      Set<String> foundNodes,
+      Map<NodeState, Long> dp) {
     var key = new NodeState(start.id, Set.copyOf(foundNodes));
 
     if (dp.containsKey(key)) return dp.get(key);

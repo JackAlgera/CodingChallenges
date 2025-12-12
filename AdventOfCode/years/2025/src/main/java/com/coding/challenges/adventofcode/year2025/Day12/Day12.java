@@ -1,13 +1,13 @@
 package com.coding.challenges.adventofcode.year2025.Day12;
 
+import com.coding.challenges.adventofcode.utils.Day;
+import com.coding.challenges.adventofcode.utils.Pos;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import com.coding.challenges.adventofcode.utils.Day;
-import com.coding.challenges.adventofcode.utils.Pos;
 
 public class Day12 extends Day<Long> {
 
@@ -39,15 +39,14 @@ public class Day12 extends Day<Long> {
       }
 
       // Fail fast if total area > region area
-      int totalPresentArea = regionPresents.stream()
-                                           .mapToInt(p -> countHashes(p.grid()))
-                                           .sum();
+      int totalPresentArea = regionPresents.stream().mapToInt(p -> countHashes(p.grid())).sum();
       if (totalPresentArea > region.width() * region.height()) {
         continue;
       }
 
       // Sort presents by size descending for better packing performance
-      regionPresents.sort((p1, p2) -> Integer.compare(countHashes(p2.grid()), countHashes(p1.grid())));
+      regionPresents.sort(
+          (p1, p2) -> Integer.compare(countHashes(p2.grid()), countHashes(p1.grid())));
 
       boolean[][] board = new boolean[region.height()][region.width()];
       if (canPack(board, regionPresents, 0)) {
@@ -123,9 +122,7 @@ public class Day12 extends Day<Long> {
     int iMin = points.stream().mapToInt(Pos::i).min().orElse(0);
     int jMin = points.stream().mapToInt(Pos::j).min().orElse(0);
 
-    return points.stream()
-                 .map(p -> new Pos(p.i() - iMin, p.j() - jMin))
-                 .toList();
+    return points.stream().map(p -> new Pos(p.i() - iMin, p.j() - jMin)).toList();
   }
 
   private Boolean[][] rotate(Boolean[][] grid) {
@@ -185,7 +182,8 @@ public class Day12 extends Day<Long> {
     for (String line : lines.subList(6 * 5, lines.size())) {
       int width = Integer.parseInt(line.split(":")[0].split("x")[0]);
       int height = Integer.parseInt(line.split(":")[0].split("x")[1]);
-      var presentIds = Arrays.stream(line.split(":")[1].trim().split(" ")).mapToInt(Integer::parseInt).toArray();
+      var presentIds =
+          Arrays.stream(line.split(":")[1].trim().split(" ")).mapToInt(Integer::parseInt).toArray();
       regions.add(new Region(width, height, presentIds));
     }
     return regions;
@@ -196,10 +194,7 @@ public class Day12 extends Day<Long> {
     for (int i = 0; i < 6; i++) {
       var grid = new Boolean[3][3];
       for (int k = 0; k < 3; k++) {
-        var row = lines.get(i * 5 + k + 1)
-                       .chars()
-                       .mapToObj(c -> c == '#')
-                .toArray(Boolean[]::new);
+        var row = lines.get(i * 5 + k + 1).chars().mapToObj(c -> c == '#').toArray(Boolean[]::new);
         grid[k] = row;
       }
       presents.add(new Present(i, grid));
