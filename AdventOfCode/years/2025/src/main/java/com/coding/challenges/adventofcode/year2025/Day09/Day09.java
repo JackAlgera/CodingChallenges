@@ -1,8 +1,8 @@
 package com.coding.challenges.adventofcode.year2025.Day09;
 
+import com.coding.challenges.adventofcode.utils.Day;
 import java.io.IOException;
 import java.util.List;
-import com.coding.challenges.adventofcode.utils.Day;
 
 public class Day09 extends Day<Long> {
 
@@ -18,9 +18,13 @@ public class Day09 extends Day<Long> {
 
   @Override
   public Long part1(List<String> lines) {
-    var tiles = lines.stream()
-                     .map(t -> new Coordinate(Integer.parseInt(t.split(",")[0]), Integer.parseInt(t.split(",")[1])))
-                     .toList();
+    var tiles =
+        lines.stream()
+            .map(
+                t ->
+                    new Coordinate(
+                        Integer.parseInt(t.split(",")[0]), Integer.parseInt(t.split(",")[1])))
+            .toList();
 
     long maxArea = 0L;
     for (int i = 0; i < tiles.size(); i++) {
@@ -39,9 +43,13 @@ public class Day09 extends Day<Long> {
 
   @Override
   public Long part2(List<String> lines) {
-    var tiles = lines.stream()
-                     .map(t -> new Coordinate(Integer.parseInt(t.split(",")[0]), Integer.parseInt(t.split(",")[1])))
-                     .toList();
+    var tiles =
+        lines.stream()
+            .map(
+                t ->
+                    new Coordinate(
+                        Integer.parseInt(t.split(",")[0]), Integer.parseInt(t.split(",")[1])))
+            .toList();
     long maxArea = 0L;
 
     for (int i = 0; i < tiles.size(); i++) {
